@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>AYAM GEPUK SULTAN CHANGLUN - Jom Berbuka</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { 
+            font-family: 'Poppins', sans-serif; 
+            background-color: #fefce8; 
+            /* Ruang untuk header yang lebih tinggi dan footer fixed */
+            padding-top: 165px;
+            padding-bottom: 120px;
+        }
+        .bg-sultan-red { background-color: #b91c1c; }
+        .text-sultan-red { color: #b91c1c; }
+        .bg-sultan-yellow { background-color: #facc15; }
+        .btn-whatsapp { background-color: #25D366; }
+        input[type="radio"]:checked + label { border-color: #b91c1c; background-color: #fef2f2; }
+        
+        .animate-slide-up { animation: slideUp 0.3s ease-out; }
+        @keyframes slideUp { from { transform: translateY(100%); } to { transform: translateY(0); } }
+        
+        #notification {
+            visibility: hidden;
+            min-width: 200px;
+            margin-left: -100px;
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            border-radius: 12px;
+            padding: 16px;
+            position: fixed;
+            z-index: 1000;
+            left: 50%;
+            bottom: 130px; 
+            font-size: 14px;
+        }
+        #notification.show {
+            visibility: visible;
+            animation: fadein 0.5s, fadeout 0.5s 2.5s;
+        }
+        @keyframes fadein { from {bottom: 0; opacity: 0;} to {bottom: 130px; opacity: 1;} }
+        @keyframes fadeout { from {bottom: 120px; opacity: 1;} to {bottom: 0; opacity: 0;} }
+
+        /* Header & Footer Fixed */
+        .fixed-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+        }
+        .fixed-footer {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            padding-bottom: env(safe-area-inset-bottom);
+        }
+
+        .btn-footer {
+            height: 52px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            transition: transform 0.1s;
+        }
+        .btn-footer:active { transform: scale(0.96); }
+
+        #footer-cart-content {
+            display: none;
+            position: fixed;
+            bottom: 84px; 
+            left: 0;
+            right: 0;
+            z-index: 90;
+        }
+        #footer-cart-content.open { display: block; }
+
+        .modal-body-scroll {
+            max-height: 60dvh; 
+            overflow-y: auto;
+            padding-right: 4px;
+        }
+
+        #menu-image-section {
+            transition: max-height 0.3s ease-out;
+            max-height: 0;
+            overflow: hidden;
+        }
+        #menu-image-section.show { max-height: 1000px; }
+
+        .tc-card {
+            background-color: white;
+            border-radius: 1.5rem;
+            padding: 1.5rem;
+            border: 1px solid #fef2f2;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <div id="notification">Item ditambah!</div>
+
+    <!-- Header (Fixed & Centered) -->
+    <header class="fixed-header bg-white shadow-xl w-full">
+        <div class="bg-sultan-red text-white py-3 px-4 flex items-center justify-center text-center border-b border-red-800">
+            <img src="https://lh3.googleusercontent.com/d/1yQeeitmXIqPffmPhCdLZqETLflGSyrbs" 
+                 alt="Logo" 
+                 class="h-12 w-12 rounded-full border-2 border-white shadow-sm bg-white object-cover flex-shrink-0 mr-3">
+            <div class="text-left">
+                <h1 class="text-xs md:text-sm font-bold leading-tight uppercase tracking-tight text-white">AYAM GEPUK SULTAN CHANGLUN</h1>
+                <p class="text-[9px] font-medium text-yellow-400 italic">"Good Food, Good Mood"</p>
+            </div>
+        </div>
+
+        <div class="bg-white px-4 py-2 border-b border-gray-100 flex flex-col items-center text-center space-y-1">
+            <div class="flex items-center text-[9px] text-gray-600">
+                <svg class="w-3 h-3 text-red-700 mr-1.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"></path></svg>
+                <span>Pekan Changlun II (Belakang CMART Changlun)</span>
+            </div>
+            <div class="flex items-center text-[9px] text-gray-600">
+                <svg class="w-3 h-3 text-red-700 mr-1.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"></path></svg>
+                <span class="font-bold">Setiap Hari | 2.00 PM - 11.00 PM <span class="text-red-700">(Ramadan)</span></span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <div class="max-w-md mx-auto px-4">
+        
+        <!-- STEP 0: INTRO PAGE -->
+        <div id="step0" class="animate-slide-up">
+            <div class="text-center mb-8">
+                <h2 class="text-3xl font-black text-red-700 uppercase tracking-tighter mb-1">Jom Berbuka</h2>
+                <p class="text-xs font-bold text-gray-800 leading-tight px-4 uppercase tracking-wide">
+                    Raikan Iftar Bersama Yang Tersayang di Ayam Gepuk Sultan Changlun
+                </p>
+            </div>
+
+            <div class="bg-red-700 text-white rounded-3xl p-6 shadow-lg mb-6">
+                <p class="text-[11px] leading-relaxed text-center italic">
+                    "Bulan Ramadan lebih bermakna bila dikongsi bersama. Bawa keluarga dan rakan-rakan untuk menikmati hidangan Ayam Gepuk Sultan Changlun. Ruang selesa, hidangan mengenyangkan, dan harga yang sangat berbaloi."
+                </p>
+            </div>
+
+            <div class="tc-card mb-8">
+                <h3 class="text-xs font-bold text-red-700 uppercase tracking-widest mb-4 flex items-center">
+                    <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                    Terma & Syarat
+                </h3>
+                <ul class="space-y-4 text-[10px] text-gray-700">
+                    <li class="flex items-start">
+                        <span class="bg-red-100 text-red-700 font-bold px-1.5 rounded mr-3">1</span>
+                        <p><span class="font-bold text-gray-900">Kekosongan Meja:</span> Tempahan meja adalah terhad dan tertakluk kepada kekosongan pada waktu tersebut.</p>
+                    </li>
+                    <li class="flex items-start">
+                        <span class="bg-red-100 text-red-700 font-bold px-1.5 rounded mr-3">2</span>
+                        <p><span class="font-bold text-gray-900">Waktu Tempahan:</span> Sila lakukan tempahan selewat-lewatnya sebelum jam 7:00 PM.</p>
+                    </li>
+                    <li class="flex items-start">
+                        <span class="bg-red-100 text-red-700 font-bold px-1.5 rounded mr-3">3</span>
+                        <p><span class="font-bold text-gray-900">Cara Pesan:</span> Sila isi butiran tempahan dan pesanan makanan dengan lengkap, kemudian tekan button hantar ke WhatsApp untuk dihantar terus kepada Admin.</p>
+                    </li>
+                    <li class="flex items-start">
+                        <span class="bg-red-100 text-red-700 font-bold px-1.5 rounded mr-3">4</span>
+                        <p><span class="font-bold text-gray-900">Bayaran & Pengesahan:</span> Admin akan memberikan QR Code selepas pesanan diterima. Bayaran penuh perlu dijelaskan segera bagi mengesahkan tempahan meja anda.</p>
+                    </li>
+                    <li class="flex items-start">
+                        <span class="bg-red-100 text-red-700 font-bold px-1.5 rounded mr-3">5</span>
+                        <p><span class="font-bold text-gray-900">Bantuan:</span> Sila WhatsApp <span class="font-bold">+6017-4695064</span> sekiranya anda mengalami sebarang masalah atau kesulitan semasa proses tempahan.</p>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- "Mula Tempahan" Button -->
+            <button onclick="changeStep(1)" class="w-full btn-footer bg-sultan-red text-white shadow-xl text-lg tracking-widest mb-10">
+                Mula Tempahan
+            </button>
+        </div>
+
+        <!-- STEP 1: MENU SELECTION -->
+        <div id="step1" class="hidden">
+            <!-- Back to Intro Button -->
+            <button onclick="changeStep(0)" class="mb-4 text-red-700 font-semibold flex items-center text-sm transition active:scale-95">
+                ← Kembali ke Laman Utama
+            </button>
+
+            <div class="mb-4">
+                <h2 class="text-lg font-bold text-gray-800 flex items-center">
+                    <span class="bg-red-700 text-white w-6 h-6 rounded-full flex items-center justify-center mr-2 text-[10px]">1</span>
+                    Pilihan Menu Utama
+                </h2>
+                <p class="text-[11px] text-red-700 italic font-semibold mt-1 ml-8">Sila rujuk gambar menu di bawah</p>
+            </div>
+
+            <!-- COLLAPSIBLE MENU IMAGE -->
+            <div class="mb-6">
+                <button onclick="toggleMenuImage()" class="w-full bg-white border border-gray-200 py-2.5 px-4 rounded-xl flex items-center justify-between shadow-sm active:bg-gray-50 transition">
+                    <span class="text-xs font-bold text-gray-700 uppercase tracking-wider flex items-center">
+                        <svg class="w-4 h-4 mr-2 text-red-700" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z" clip-rule="evenodd"></path></svg>
+                        Lihat Gambar Menu
+                    </span>
+                    <svg id="arrow-icon" class="w-4 h-4 text-gray-400 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </button>
+                
+                <div id="menu-image-section" class="mt-3">
+                    <div class="bg-white p-2 rounded-2xl shadow-md border border-gray-100">
+                        <img src="https://lh3.googleusercontent.com/d/102aS8_2Aiyw2A80L8REduI2l7tDudCnG" 
+                             alt="Gambar Menu Penuh" 
+                             class="w-full h-auto rounded-xl">
+                    </div>
+                </div>
+            </div>
+            
+            <div id="menu-list" class="space-y-4"></div>
+
+            <h2 class="text-lg font-bold text-gray-800 mt-10 mb-4 flex items-center">
+                <span class="bg-red-700 text-white w-6 h-6 rounded-full flex items-center justify-center mr-2 text-[10px]">2</span>
+                Add-Ons (Tambahan)
+            </h2>
+            <div id="addon-list" class="space-y-3 bg-white p-4 rounded-xl shadow-sm border border-yellow-200"></div>
+
+            <h2 class="text-lg font-bold text-gray-800 mt-10 mb-4 flex items-center">
+                <span class="bg-red-700 text-white w-6 h-6 rounded-full flex items-center justify-center mr-2 text-[10px]">3</span>
+                Minuman (Air)
+            </h2>
+            <div id="drink-list" class="space-y-3 bg-white p-4 rounded-xl shadow-sm border border-yellow-200"></div>
+        </div>
+
+        <!-- STEP 2: Maklumat -->
+        <div id="step2" class="hidden">
+            <button onclick="changeStep(1)" class="mb-4 text-red-700 font-semibold flex items-center text-sm transition active:scale-95">
+                ← Kembali ke Menu
+            </button>
+            <h2 class="text-lg font-bold text-gray-800 mb-4 flex items-center">
+                <span class="bg-red-700 text-white w-6 h-6 rounded-full flex items-center justify-center mr-2 text-[10px]">2</span>
+                Maklumat Tempahan
+            </h2>
+            <div class="bg-white rounded-2xl p-6 shadow-md space-y-4 border border-gray-100">
+                <div>
+                    <label class="block text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-1">Nama Penuh</label>
+                    <input type="text" id="cust_nama" class="w-full p-3 rounded-lg border border-gray-300 text-sm outline-none focus:ring-1 focus:ring-red-500" placeholder="Masukkan nama anda">
+                </div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-1">Tarikh</label>
+                        <input type="date" id="cust_tarikh" class="w-full p-3 rounded-lg border border-gray-300 text-sm outline-none">
+                    </div>
+                    <div>
+                        <label class="block text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-1">Masa</label>
+                        <select id="cust_masa" class="w-full p-3 rounded-lg border border-gray-300 text-sm outline-none">
+                            <option value="2:00 PM">2:00 PM</option>
+                            <option value="3:00 PM">3:00 PM</option>
+                            <option value="4:00 PM">4:00 PM</option>
+                            <option value="5:00 PM">5:00 PM</option>
+                            <option value="6:00 PM">6:00 PM</option>
+                            <option value="7:00 PM" selected>7:00 PM</option>
+                            <option value="8:00 PM">8:00 PM</option>
+                            <option value="9:00 PM">9:00 PM</option>
+                            <option value="10:00 PM">10:00 PM</option>
+                            <option value="11:00 PM">11:00 PM</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-1">Bil. Pax</label>
+                        <select id="cust_pax" class="w-full p-3 rounded-lg border border-gray-300 text-sm outline-none">
+                            <script>for(let i=1; i<=20; i++) document.write(`<option value="${i}">${i} Pax</option>`);</script>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-1">Jenis</label>
+                        <select id="cust_jenis" class="w-full p-3 rounded-lg border border-gray-300 text-sm outline-none">
+                            <option value="Dine-In">Dine-In</option>
+                            <option value="Pick-up">Pick-up</option>
+                        </select>
+                    </div>
+                </div>
+                <div>
+                    <label class="block text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-1">Pesanan Khas</label>
+                    <textarea id="cust_notes" rows="2" class="w-full p-3 rounded-lg border border-gray-300 text-sm outline-none" placeholder="Cth: Kurangkan kicap..."></textarea>
+                </div>
+            </div>
+        </div>
+
+        <!-- STEP 3: CONFIRMATION -->
+        <div id="step3" class="hidden animate-slide-up">
+            <button onclick="changeStep(2)" class="mb-4 text-red-700 font-semibold flex items-center text-sm">
+                ← Kembali ke Maklumat
+            </button>
+            <h2 class="text-lg font-bold text-gray-800 mb-4 flex items-center">
+                <span class="bg-red-700 text-white w-6 h-6 rounded-full flex items-center justify-center mr-2 text-[10px]">3</span>
+                Pengesahan Tempahan
+            </h2>
+            <div class="bg-white rounded-2xl p-6 shadow-md border border-gray-100 space-y-6 mb-10">
+                <div class="border-b pb-4 text-xs">
+                    <h3 class="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-3 text-center">Ringkasan Pelanggan</h3>
+                    <div class="grid grid-cols-2 gap-y-3 text-sm">
+                        <div class="text-gray-500 text-sm">Nama:</div><div id="conf_nama" class="font-bold text-gray-800 text-right text-sm"></div>
+                        <div class="text-gray-500 text-sm">Masa:</div><div id="conf_tarikh_masa" class="font-bold text-gray-800 text-right text-sm"></div>
+                        <div class="text-gray-500 text-sm">Bilangan:</div><div id="conf_pax" class="font-bold text-gray-800 text-right text-sm"></div>
+                        <div class="text-gray-500 text-sm">Jenis:</div><div id="conf_jenis" class="font-bold text-gray-800 text-right text-sm"></div>
+                    </div>
+                </div>
+                <div>
+                    <div class="flex justify-between items-center mb-3">
+                        <h3 class="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Item Dipesan</h3>
+                        <span class="text-[9px] text-gray-400 italic font-medium">*Padam jika silap</span>
+                    </div>
+                    <div id="order-summary-final" class="space-y-3 text-sm text-gray-700"></div>
+                </div>
+                
+                <div class="bg-yellow-50 border border-yellow-200 p-4 rounded-lg">
+                    <p class="text-[11px] text-red-700 font-bold text-center leading-relaxed">
+                        Sila hantar pesanan ke WhatsApp untuk membuat tempahan meja. Admin akan memberikan QR Code selepas pesanan diterima. Bayaran penuh perlu dijelaskan segera bagi mengesahkan tempahan meja anda.
+                    </p>
+                </div>
+
+                <div id="conf_notes_container" class="bg-gray-50 p-3 rounded-lg hidden text-[10px] italic text-gray-600 border-l-4 border-red-200"></div>
+                
+                <div class="pt-2 flex flex-col space-y-3">
+                    <div class="bg-red-700 text-white p-4 rounded-xl flex justify-between items-center shadow-lg">
+                        <span class="font-bold text-xs uppercase tracking-widest">JUMLAH</span>
+                        <span id="conf_total" class="text-xl font-bold text-yellow-400">RM 0.00</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- FOOTER (Fixed & Centered Contents) -->
+    <div id="footer-section" class="fixed-footer bg-white border-t border-gray-100 shadow-[0_-8px_30px_rgba(0,0,0,0.12)] w-full hidden">
+        
+        <!-- Dropdown Cart Overlay -->
+        <div id="footer-cart-content" class="bg-white border-t border-gray-100 shadow-2xl max-w-md mx-auto rounded-t-3xl overflow-hidden animate-slide-up">
+            <div class="py-4 px-6 flex justify-between items-center border-b border-gray-50 bg-gray-50">
+                <h3 class="text-xs font-bold text-gray-800 uppercase flex items-center tracking-widest">
+                    <svg class="w-4 h-4 mr-2 text-red-700" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path></svg>
+                    Semak Bakul
+                </h3>
+                <button onclick="toggleCart()" class="text-red-700 text-xs font-bold p-2 uppercase tracking-tighter text-[10px]">Tutup</button>
+            </div>
+            <div id="footer-cart-list" class="max-h-64 overflow-y-auto space-y-3 py-4 px-6 text-sm text-gray-700"></div>
+        </div>
+
+        <!-- CENTERED FOOTER BAR -->
+        <div class="max-w-md mx-auto p-4 flex items-center justify-center space-x-6">
+            <!-- Subtotal -->
+            <div id="footer-subtotal-container" class="flex flex-col items-center min-w-[80px]">
+                <p class="text-[8px] text-gray-400 uppercase font-bold tracking-tighter leading-none mb-1">Subtotal</p>
+                <p class="text-lg font-bold text-gray-800 leading-none whitespace-nowrap" id="total-price">RM 0.00</p>
+            </div>
+
+            <!-- View Cart Logo Icon -->
+            <div id="footer-cart-toggle" class="invisible flex-shrink-0">
+                <button onclick="toggleCart()" class="relative p-3 bg-red-50 text-red-700 rounded-xl border border-red-100 transition active:scale-90 flex items-center justify-center">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path></svg>
+                    <span id="item-count-badge" class="absolute -top-1 -right-1 bg-red-700 text-white w-5 h-5 rounded-full flex items-center justify-center text-[10px] font-bold border-2 border-white shadow-sm">0</span>
+                </button>
+            </div>
+
+            <!-- Main Action Button -->
+            <button id="main-action-btn" onclick="handleMainAction()" class="btn-footer bg-sultan-red text-white shadow-md text-sm px-6 whitespace-nowrap min-w-[140px]">
+                <span id="btn-label">Seterusnya</span>
+                <svg id="btn-icon" class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path></svg>
+            </button>
+        </div>
+    </div>
+
+    <!-- Modals -->
+    <div id="menuModal" class="hidden fixed inset-0 bg-black bg-opacity-60 z-[1000] flex items-end sm:items-center justify-center p-0 sm:p-4">
+        <div class="bg-white w-full max-w-md rounded-t-3xl sm:rounded-2xl p-5 shadow-2xl animate-slide-up flex flex-col max-h-[80vh] overflow-hidden">
+            <div class="flex justify-between items-center mb-3 flex-shrink-0">
+                <h3 id="modalTitle" class="text-lg font-bold text-gray-800 tracking-tight">Pilihan Menu</h3>
+                <button onclick="closeModal()" class="text-gray-400 text-3xl font-light p-1 leading-none">&times;</button>
+            </div>
+            
+            <div id="modalBody" class="space-y-4 modal-body-scroll flex-1"></div>
+            
+            <div class="pt-4 flex-shrink-0 border-t border-gray-100 mt-2 bg-white">
+                <button onclick="addToCartFromModal()" class="btn-footer w-full bg-sultan-red text-white shadow-xl text-sm uppercase tracking-widest h-11">
+                    Tambah ke Bakul
+                </button>
+                <div class="h-4"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const menuData = [
+            { id: 1, name: "Ayam Gepuk Set A", desc: "Nasi, Ayam 1/4, Sambal, Kobis, Timun", alakart: 12.50, combo: 14.00 },
+            { id: 2, name: "Ayam Gepuk Set B", desc: "Nasi, Ayam 1/4, Tahu, Tempe, Sambal, Kobis, Timun", alakart: 13.50, combo: 15.00 },
+            { id: 3, name: "Ayam Gepuk Set C", desc: "Nasi, Ayam 1/4, Tahu, Tempe, Sambal, Hati & Pedal @ Kobis Goreng, Timun", alakart: 14.50, combo: 16.00 },
+            { id: 4, name: "Ayam Gepuk Set D", desc: "Nasi, Ayam 1/4, Tahu, Tempe, Sambal, Hati & Pedal, Kobis Goreng, Timun", alakart: 15.50, combo: 17.00 },
+            { id: 5, name: "Set Ayam Crispy", desc: "Nasi, Ayam Crispy, Tahu, Tempe, Sambal, Kobis, Timun", alakart: 14.50, combo: 16.00 },
+            { id: 6, name: "Set Leley", desc: "Nasi, Ikan Keli, Tahu, Tempe, Sambal, Kobis, Timun", alakart: 11.00, combo: 12.50 },
+            { id: 7, name: "Set Kunyet", desc: "Nasi, Lauk Ayam Kunyit, Telur Mata, Sambal, Timun", alakart: 11.00, combo: 12.50 }
+        ];
+
+        const addonsData = [
+            { id: 201, name: "Ayam 1/4 @ Crispy", price: 7.00 },
+            { id: 202, name: "Ayam Crispy Sultan", price: 6.00 },
+            { id: 203, name: "Ikan Keli", price: 6.00 },
+            { id: 204, name: "Ayam Kunyit", price: 7.00 },
+            { id: 205, name: "Telur Mata", price: 2.00 },
+            { id: 206, name: "Ulaman", price: 2.00 },
+            { id: 207, name: "Kobis Goreng", price: 3.00 },
+            { id: 208, name: "Sambal Gajus", price: 3.00 },
+            { id: 209, name: "Bumbu Gajus", price: 3.00 },
+            { id: 210, name: "Nasi Putih", price: 2.00 },
+            { id: 211, name: "Tahu (2) + Tempe (5)", price: 3.50 },
+            { id: 212, name: "Hati (2) + Pedal (1)", price: 3.50 },
+            { id: 213, name: "Kicap", price: 1.00 }
+        ];
+
+        const drinksData = [
+            { id: 301, name: "Tea 'o' Ais", price: 2.50 },
+            { id: 302, name: "Sirap Ais", price: 2.50 },
+            { id: 303, name: "Limau Ais", price: 2.50 },
+            { id: 304, name: "Tea 'o' Limau Ais", price: 2.50 },
+            { id: 305, name: "Sirap Limau Ais", price: 2.50 }
+        ];
+
+        let cart = [];
+        let currentStep = 0;
+        let selectedMenuItem = null;
+        let isCartOpen = false;
+
+        function init() {
+            const menuContainer = document.getElementById('menu-list');
+            menuData.forEach(item => {
+                const div = document.createElement('div');
+                div.className = "bg-white p-4 rounded-2xl shadow-sm border border-gray-100 flex items-center justify-between transition active:bg-gray-50";
+                div.innerHTML = `<div class="flex-1 text-left"><h4 class="font-bold text-gray-800 text-sm leading-tight">${item.name}</h4><p class="text-[10px] text-gray-500 mt-1.5 leading-tight pr-2">${item.desc}</p><p class="text-red-700 font-bold mt-2 text-xs">RM ${item.alakart.toFixed(2)} - RM ${item.combo.toFixed(2)}</p></div><button onclick="openMenuModal(${item.id})" class="bg-sultan-yellow px-4 py-2 rounded-xl text-[10px] font-bold text-red-800 shadow-sm transition active:scale-95 uppercase tracking-wider flex-shrink-0 ml-2">Pilih</button>`;
+                menuContainer.appendChild(div);
+            });
+
+            const addonContainer = document.getElementById('addon-list');
+            addonsData.forEach(item => {
+                const div = document.createElement('div');
+                div.className = "flex items-center justify-between py-2 border-b border-gray-50 last:border-0";
+                div.innerHTML = `<div><span class="text-sm font-bold text-gray-700">${item.name}</span><span class="text-xs text-red-600 block font-bold mt-0.5">RM ${item.price.toFixed(2)}</span></div><button onclick="addToCartDirect(${item.id}, 'addon')" class="text-2xl text-red-700 font-bold px-3 transition active:scale-150">+</button>`;
+                addonContainer.appendChild(div);
+            });
+
+            const drinkContainer = document.getElementById('drink-list');
+            drinksData.forEach(item => {
+                const div = document.createElement('div');
+                div.className = "flex items-center justify-between py-2 border-b border-gray-50 last:border-0";
+                div.innerHTML = `<div><span class="text-sm font-bold text-gray-700">${item.name}</span><span class="text-xs text-red-600 block font-bold mt-0.5">RM ${item.price.toFixed(2)}</span></div><button onclick="addToCartDirect(${item.id}, 'drink')" class="text-2xl text-red-700 font-bold px-3 transition active:scale-150">+</button>`;
+                drinkContainer.appendChild(div);
+            });
+            
+            const today = new Date();
+            const dateString = `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, '0')}-${String(today.getDate()).padStart(2, '0')}`;
+            const dateInput = document.getElementById('cust_tarikh');
+            dateInput.value = dateString;
+            dateInput.min = dateString;
+            
+            updateCartDisplay();
+        }
+
+        function showNotification(msg) {
+            const toast = document.getElementById("notification");
+            toast.innerText = msg; toast.className = "show";
+            setTimeout(() => { toast.className = toast.className.replace("show", ""); }, 3000);
+        }
+
+        function toggleCart() {
+            isCartOpen = !isCartOpen;
+            const content = document.getElementById('footer-cart-content');
+            if (isCartOpen) content.classList.add('open');
+            else content.classList.remove('open');
+        }
+
+        function toggleMenuImage() {
+            const section = document.getElementById('menu-image-section');
+            const arrow = document.getElementById('arrow-icon');
+            section.classList.toggle('show');
+            arrow.classList.toggle('rotate-180');
+        }
+
+        function openMenuModal(id) {
+            selectedMenuItem = menuData.find(m => m.id === id);
+            document.getElementById('modalTitle').innerText = selectedMenuItem.name;
+            const body = document.getElementById('modalBody');
+            body.innerHTML = `
+                <div class="space-y-1">
+                    <p class="text-[10px] font-bold text-gray-400 uppercase tracking-widest leading-none mb-1.5">Tahap Pedas</p>
+                    <div class="grid grid-cols-2 gap-2">
+                        ${['Kurang Pedas', 'Biasa', 'Pedas', 'Extra Pedas'].map(lvl => `
+                            <input type="radio" name="pedas" id="p_${lvl}" value="${lvl}" class="hidden" ${lvl === 'Biasa' ? 'checked' : ''}>
+                            <label for="p_${lvl}" class="border-2 border-gray-100 rounded-xl p-2.5 text-center text-xs font-bold transition cursor-pointer active:bg-gray-50">${lvl}</label>
+                        `).join('')}
+                    </div>
+                </div>
+                <div class="space-y-1 pt-2">
+                    <p class="text-[10px] font-bold text-gray-400 uppercase tracking-widest leading-none mb-1.5">Pilihan Set</p>
+                    <div class="grid grid-cols-2 gap-2">
+                        <input type="radio" name="set_type" id="type_ala" value="Ala-Carte" class="hidden" checked onchange="toggleDrinkSelect(false)">
+                        <label for="type_ala" class="border-2 border-gray-100 rounded-xl p-2.5 text-center transition cursor-pointer active:bg-gray-50">
+                            <span class="block font-bold text-xs mb-0.5">Ala-Carte</span>
+                            <span class="text-[10px] text-red-600 font-bold leading-none">RM ${selectedMenuItem.alakart.toFixed(2)}</span>
+                        </label>
+                        <input type="radio" name="set_type" id="type_combo" value="Kombo" class="hidden" onchange="toggleDrinkSelect(true)">
+                        <label for="type_combo" class="border-2 border-gray-100 rounded-xl p-2.5 text-center transition cursor-pointer active:bg-gray-50">
+                            <span class="block font-bold text-xs mb-0.5">Kombo</span>
+                            <span class="text-[10px] text-red-600 font-bold leading-none">RM ${selectedMenuItem.combo.toFixed(2)}</span>
+                        </label>
+                    </div>
+                </div>
+                <div id="drinkSection" class="hidden pt-2">
+                    <p class="text-[10px] font-bold text-gray-400 uppercase tracking-widest leading-none mb-1.5">Pilih Air Kombo</p>
+                    <div class="grid grid-cols-2 gap-2">
+                        ${['Teh O Ais', 'Sirap Ais'].map(drink => `
+                            <input type="radio" name="drink" id="d_${drink}" value="${drink}" class="hidden" ${drink === 'Teh O Ais' ? 'checked' : ''}>
+                            <label for="d_${drink}" class="border-2 border-gray-100 rounded-xl p-2.5 text-center text-xs font-bold transition cursor-pointer active:bg-gray-50">${drink}</label>
+                        `).join('')}
+                    </div>
+                </div>
+            `;
+            document.getElementById('menuModal').classList.remove('hidden');
+        }
+
+        function toggleDrinkSelect(show) { document.getElementById('drinkSection').classList.toggle('hidden', !show); }
+        function closeModal() { document.getElementById('menuModal').classList.add('hidden'); }
+
+        function addToCartFromModal() {
+            const pedas = document.querySelector('input[name="pedas"]:checked').value;
+            const setType = document.querySelector('input[name="set_type"]:checked').value;
+            let drink = "";
+            if (setType === 'Kombo') {
+                const drinkEl = document.querySelector('input[name="drink"]:checked');
+                drink = drinkEl ? drinkEl.value : "";
+            }
+            cart.push({ name: selectedMenuItem.name, type: setType, options: `(${pedas}${drink ? ', ' + drink : ''})`, price: setType === 'Kombo' ? selectedMenuItem.combo : selectedMenuItem.alakart, uniqueId: Date.now() });
+            updateCartDisplay(); closeModal(); showNotification(`${selectedMenuItem.name} ditambah!`);
+        }
+
+        function addToCartDirect(id, category) {
+            const data = category === 'addon' ? addonsData : drinksData;
+            const item = data.find(e => e.id === id);
+            cart.push({ name: item.name, type: category === 'addon' ? "Add-on" : "Drink", options: "", price: item.price, uniqueId: Date.now() });
+            updateCartDisplay(); showNotification(`${item.name} ditambah!`);
+        }
+
+        function removeFromCart(uid) {
+            cart = cart.filter(i => i.uniqueId !== uid);
+            if (cart.length === 0 && isCartOpen) toggleCart();
+            updateCartDisplay();
+        }
+
+        function deleteItemInConfirmation(uid) {
+            removeFromCart(uid);
+            if (cart.length === 0) { changeStep(1); showNotification("Bakul dikosongkan."); }
+            else { updateConfirmDisplay(); }
+        }
+
+        function updateCartDisplay() {
+            const total = cart.reduce((sum, item) => sum + item.price, 0);
+            document.querySelectorAll('#total-price').forEach(el => el.innerText = `RM ${total.toFixed(2)}`);
+            const list = document.getElementById('footer-cart-list');
+            const toggle = document.getElementById('footer-cart-toggle');
+            const badge = document.getElementById('item-count-badge');
+            if (cart.length > 0) {
+                toggle.classList.remove('invisible');
+                badge.innerText = cart.length;
+                list.innerHTML = cart.map(item => `<div class="flex justify-between items-center py-4 border-b border-gray-50 last:border-0 text-sm"><div class="flex-1 mr-4 text-left"><p class="font-bold text-gray-800 leading-tight">${item.name}</p><p class="text-[11px] text-gray-400 uppercase tracking-tighter mt-1 font-semibold">${item.type} ${item.options}</p></div><div class="flex items-center space-x-5"><span class="font-bold text-red-700 whitespace-nowrap text-base">RM${item.price.toFixed(2)}</span><button onclick="removeFromCart(${item.uniqueId})" class="text-red-300 transition active:scale-150 p-2"><svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" /></svg></button></div></div>`).join('');
+            } else {
+                toggle.classList.add('invisible');
+                if (isCartOpen) toggleCart();
+            }
+        }
+
+        function changeStep(step) {
+            if (step === 2 && cart.length === 0) { alert("Sila pilih menu!"); return; }
+            if (step === 3) {
+                if (!document.getElementById('cust_nama').value || !document.getElementById('cust_tarikh').value) {
+                    alert("Lengkapkan maklumat!"); return;
+                }
+                updateConfirmDisplay();
+            }
+            currentStep = step;
+            document.getElementById('step0').classList.toggle('hidden', step !== 0);
+            document.getElementById('step1').classList.toggle('hidden', step !== 1);
+            document.getElementById('step2').classList.toggle('hidden', step !== 2);
+            document.getElementById('step3').classList.toggle('hidden', step !== 3);
+            
+            const btnLabel = document.getElementById('btn-label');
+            const btnIcon = document.getElementById('btn-icon');
+            const mainBtn = document.getElementById('main-action-btn');
+            const footer = document.getElementById('footer-section');
+            const subtotalContainer = document.getElementById('footer-subtotal-container');
+            
+            // Show footer only after Step 0
+            footer.classList.toggle('hidden', step === 0);
+
+            if (step === 3) {
+                btnLabel.innerText = "Hantar Pesanan ke WhatsApp";
+                mainBtn.classList.replace('bg-sultan-red', 'bg-green-500');
+                mainBtn.classList.add('flex-1');
+                subtotalContainer.classList.add('hidden');
+                btnIcon.innerHTML = `<svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.588-5.946 0-6.556 5.332-11.891 11.893-11.891 3.181 0 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.481 8.414 0 6.556-5.333 11.892-11.893 11.892-1.99 0-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884 0 2.225.569 3.961 1.694 5.908l-.995 3.634 3.79-.993zm11.378-7.4c-.066-.11-.24-.176-.505-.308-.266-.133-1.569-.774-1.812-.862-.243-.088-.42-.133-.596.133-.177.265-.685.861-.839 1.038-.155.177-.309.199-.575.066-.266-.132-1.12-.414-2.132-1.317-.788-.702-1.319-1.569-1.474-1.835-.155-.265-.017-.409.116-.541.12-.12.266-.309.398-.464.133-.155.177-.265.266-.441.088-.177.044-.331-.022-.464-.066-.132-.596-1.437-.817-1.967-.215-.518-.433-.447-.596-.456-.153-.008-.33-.01-.508-.01s-.464.066-.707.331c-.243.265-.928.906-.928 2.208s.951 2.564 1.083 2.741c.132.177 1.872 2.859 4.534 4.005.633.273 1.127.436 1.512.559.635.202 1.212.174 1.668.106.508-.077 1.569-.641 1.79-1.259.221-.619.221-1.149.155-1.259z"/></svg>`;
+            } else {
+                btnLabel.innerText = "Seterusnya";
+                mainBtn.classList.replace('bg-green-500', 'bg-sultan-red');
+                mainBtn.classList.remove('flex-1');
+                subtotalContainer.classList.remove('hidden');
+                btnIcon.innerHTML = `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>`;
+            }
+            if (isCartOpen) toggleCart();
+            window.scrollTo(0,0);
+        }
+
+        function updateConfirmDisplay() {
+            const total = cart.reduce((sum, item) => sum + item.price, 0);
+            document.getElementById('conf_nama').innerText = document.getElementById('cust_nama').value;
+            document.getElementById('conf_tarikh_masa').innerText = `${document.getElementById('cust_tarikh').value} @ ${document.getElementById('cust_masa').value}`;
+            document.getElementById('conf_pax').innerText = `${document.getElementById('cust_pax').value} Pax`;
+            document.getElementById('conf_jenis').innerText = document.getElementById('cust_jenis').value;
+            const notes = document.getElementById('cust_notes').value;
+            const container = document.getElementById('conf_notes_container');
+            container.classList.toggle('hidden', !notes);
+            if(notes) container.innerText = `Nota: ${notes}`;
+            document.getElementById('conf_total').innerText = `RM ${total.toFixed(2)}`;
+            document.getElementById('order-summary-final').innerHTML = cart.map(item => `<div class="flex justify-between items-start text-xs border-b border-gray-50 pb-2 last:border-0"><div class="flex-1 mr-2 text-left"><div class="font-bold text-gray-800 leading-tight">${item.name} <span class="text-[8px] bg-red-50 text-red-700 px-1.5 py-0.5 rounded uppercase tracking-wider ml-1">${item.type}</span></div><div class="text-[10px] text-gray-400 mt-1">${item.options}</div></div><div class="flex items-center space-x-3"><div class="font-bold text-gray-700 whitespace-nowrap">RM ${item.price.toFixed(2)}</div><button onclick="deleteItemInConfirmation(${item.uniqueId})" class="text-red-500 p-1 active:scale-125 transition"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" /></svg></button></div></div>`).join('');
+        }
+
+        function handleMainAction() {
+            if (currentStep === 1) changeStep(2);
+            else if (currentStep === 2) changeStep(3);
+            else sendToWhatsApp();
+        }
+
+        function sendToWhatsApp() {
+            const total = cart.reduce((sum, item) => sum + item.price, 0);
+            let menuString = cart.map((item, index) => `${index + 1}. ${item.name} (${item.type}) ${item.options} - RM${item.price.toFixed(2)}`).join('%0A');
+            const text = `*TEMPAHAN AYAM GEPUK SULTAN CHANGLUN*%0A%0A*MAKLUMAT PELANGGAN*%0ANama: ${document.getElementById('cust_nama').value}%0ATarikh: ${document.getElementById('cust_tarikh').value}%0AMasa: ${document.getElementById('cust_masa').value}%0ABilangan: ${document.getElementById('cust_pax').value} Pax%0AJenis: ${document.getElementById('cust_jenis').value}%0A%0A*PESANAN:*%0A${menuString}%0A%0A*TOTAL: RM${total.toFixed(2)}*%0A%0ANota: ${document.getElementById('cust_notes').value || "-"}%0A%0A_Sila sahkan tempahan meja saya._`;
+            window.open(`https://wa.me/60174695064?text=${text}`, '_blank');
+        }
+
+        window.onload = init;
+    </script>
+</body>
+</html>
