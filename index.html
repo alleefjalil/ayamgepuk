@@ -191,7 +191,7 @@
                 Mula Tempahan
             </button>
 
-            <!-- CORPORATE FOOTER CREDIT IN ENGLISH -->
+            <!-- CORPORATE FOOTER CREDIT -->
             <div class="text-center pb-10">
                 <p class="text-[9px] text-gray-400 font-medium tracking-widest uppercase mb-1">
                     Digital Booking System exclusively powered by
@@ -228,7 +228,6 @@
                 <div id="menu-image-section" class="mt-3">
                     <div class="bg-white p-2 rounded-2xl shadow-md border border-gray-100 text-center">
                         <img src="https://lh3.googleusercontent.com/d/102aS8_2Aiyw2A80L8REduI2l7tDudCnG" alt="Menu Penuh" class="w-full h-auto rounded-xl mx-auto shadow-sm">
-                        <p class="text-[9px] text-gray-400 mt-2 italic">Rujukan Harga & Set</p>
                     </div>
                 </div>
             </div>
@@ -332,8 +331,8 @@
                     <div id="order-summary-final" class="space-y-3 text-sm text-gray-700"></div>
                 </div>
                 
-                <div class="bg-yellow-50 border border-yellow-200 p-4 rounded-xl">
-                    <p class="text-[11px] text-red-700 font-bold text-center leading-relaxed">
+                <div class="bg-yellow-50 border border-yellow-200 p-4 rounded-xl text-center">
+                    <p class="text-[11px] text-red-700 font-bold leading-relaxed">
                         Sila hantar pesanan ke WhatsApp untuk membuat tempahan meja. Admin akan memberikan QR Code selepas pesanan diterima. Bayaran penuh perlu dijelaskan segera bagi mengesahkan tempahan meja anda.
                     </p>
                 </div>
@@ -350,10 +349,8 @@
         </div>
     </div>
 
-    <!-- FOOTER (Fixed - Centered & Responsive) -->
+    <!-- FOOTER (Fixed) -->
     <div id="footer-section" class="fixed-footer bg-white border-t border-gray-100 shadow-[0_-12px_40px_rgba(0,0,0,0.12)] w-full hidden">
-        
-        <!-- Cart Drawer (Overlay) -->
         <div id="footer-cart-content" class="bg-white border-t border-gray-100 shadow-2xl max-w-md mx-auto rounded-t-3xl overflow-hidden animate-slide-up">
             <div class="py-4 px-6 flex justify-between items-center border-b border-gray-100 bg-gray-50">
                 <h3 class="text-xs font-bold text-gray-800 uppercase flex items-center tracking-widest">
@@ -365,14 +362,12 @@
             <div id="footer-cart-list" class="max-h-64 overflow-y-auto space-y-3 py-4 px-6 text-sm text-gray-700"></div>
         </div>
 
-        <!-- CENTERED FOOTER ACTION BAR -->
         <div class="max-w-md mx-auto p-4 flex items-center justify-center space-x-6">
             <div id="footer-subtotal-container" class="flex flex-col items-center min-w-[90px]">
                 <p class="text-[8px] text-gray-400 uppercase font-bold tracking-tighter leading-none mb-1">Subtotal</p>
                 <p class="text-lg font-bold text-gray-800 leading-none whitespace-nowrap" id="total-price">RM 0.00</p>
             </div>
 
-            <!-- View Cart Logo Icon -->
             <div id="footer-cart-toggle" class="invisible flex-shrink-0">
                 <button onclick="toggleCart()" class="relative p-3 bg-red-50 text-red-700 rounded-xl border border-red-100 transition active:scale-90 flex items-center justify-center shadow-inner">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path></svg>
@@ -380,7 +375,6 @@
                 </button>
             </div>
 
-            <!-- Main Action Button -->
             <button id="main-action-btn" onclick="handleMainAction()" class="btn-footer bg-sultan-red text-white shadow-md text-sm px-6 whitespace-nowrap min-w-[150px]">
                 <span id="btn-label">Seterusnya</span>
                 <svg id="btn-icon" class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path></svg>
@@ -398,7 +392,7 @@
             
             <div id="modalBody" class="space-y-4 modal-body-scroll flex-1"></div>
             
-            <div class="pt-4 flex-shrink-0 border-t border-gray-100 mt-2 bg-white">
+            <div class="pt-4 flex-shrink-0 border-t border-gray-100 mt-2 bg-white text-center">
                 <button onclick="addToCartFromModal()" class="btn-footer w-full bg-sultan-red text-white shadow-xl text-base uppercase tracking-widest h-12">
                     Tambah Ke Bakul
                 </button>
@@ -408,11 +402,11 @@
     </div>
 
     <script>
-        // Data Structures
+        // Database
         const menuData = [
             { id: 1, name: "Ayam Gepuk Set A", desc: "Nasi, Ayam 1/4, Sambal, Kobis, Timun", alakart: 12.50, combo: 14.00 },
             { id: 2, name: "Ayam Gepuk Set B", desc: "Nasi, Ayam 1/4, Tahu, Tempe, Sambal, Kobis, Timun", alakart: 13.50, combo: 15.00 },
-            { id: 3, name: "Ayam Gepuk Set C", desc: "Nasi, Ayam 1/4, Tahu, Tempe, Sambal, Hati & Pedal @ Kobis Goreng, Timun", alakart: 14.50, combo: 16.00 },
+            { id: 3, name: "Ayam Gepuk Set C", desc: "Nasi, Ayam 1/4, Tahu, Tempe, Sambal, Timun + Pilihan Sampingan (Hati & Pedal @ Kobis Goreng)", alakart: 14.50, combo: 16.00 },
             { id: 4, name: "Ayam Gepuk Set D", desc: "Nasi, Ayam 1/4, Tahu, Tempe, Sambal, Hati & Pedal, Kobis Goreng, Timun", alakart: 15.50, combo: 17.00 },
             { id: 5, name: "Set Ayam Crispy", desc: "Nasi, Ayam Crispy, Tahu, Tempe, Sambal, Kobis, Timun", alakart: 14.50, combo: 16.00 },
             { id: 6, name: "Set Leley", desc: "Nasi, Ikan Keli, Tahu, Tempe, Sambal, Kobis, Timun", alakart: 11.00, combo: 12.50 },
@@ -449,7 +443,6 @@
         let isCartOpen = false;
 
         function init() {
-            // Render UI lists
             const menuContainer = document.getElementById('menu-list');
             menuData.forEach(item => {
                 const div = document.createElement('div');
@@ -462,7 +455,7 @@
             addonsData.forEach(item => {
                 const div = document.createElement('div');
                 div.className = "flex items-center justify-between py-2.5 border-b border-gray-50 last:border-0";
-                div.innerHTML = `<div><span class="text-sm font-bold text-gray-700">${item.name}</span><span class="text-xs text-red-600 block font-bold mt-0.5">RM ${item.price.toFixed(2)}</span></div><button onclick="addToCartDirect(${item.id}, 'addon')" class="text-2xl text-red-700 font-bold px-3 active:scale-150 transition">+</button>`;
+                div.innerHTML = `<div><span class="text-sm font-bold text-gray-700">${item.name}</span><span class="text-xs text-red-600 block font-bold mt-0.5">RM ${item.price.toFixed(2)}</span></div><button onclick="addToCartDirect(${item.id}, 'addon')" class="text-2xl text-red-700 font-bold px-3 transition active:scale-150">+</button>`;
                 addonContainer.appendChild(div);
             });
 
@@ -470,7 +463,7 @@
             drinksData.forEach(item => {
                 const div = document.createElement('div');
                 div.className = "flex items-center justify-between py-2.5 border-b border-gray-50 last:border-0";
-                div.innerHTML = `<div><span class="text-sm font-bold text-gray-700">${item.name}</span><span class="text-xs text-red-600 block font-bold mt-0.5">RM ${item.price.toFixed(2)}</span></div><button onclick="addToCartDirect(${item.id}, 'drink')" class="text-2xl text-red-700 font-bold px-3 active:scale-150 transition">+</button>`;
+                div.innerHTML = `<div><span class="text-sm font-bold text-gray-700">${item.name}</span><span class="text-xs text-red-600 block font-bold mt-0.5">RM ${item.price.toFixed(2)}</span></div><button onclick="addToCartDirect(${item.id}, 'drink')" class="text-2xl text-red-700 font-bold px-3 transition active:scale-150">+</button>`;
                 drinkContainer.appendChild(div);
             });
             
@@ -512,9 +505,10 @@
             selectedMenuItem = menuData.find(m => m.id === id);
             document.getElementById('modalTitle').innerText = selectedMenuItem.name;
             const body = document.getElementById('modalBody');
-            body.innerHTML = `
+            
+            let modalContent = `
                 <div class="space-y-1">
-                    <p class="text-[10px] font-bold text-gray-400 uppercase tracking-widest leading-none mb-2">Pilih Tahap Pedas</p>
+                    <p class="text-[10px] font-bold text-gray-400 uppercase tracking-widest leading-none mb-2">Tahap Pedas</p>
                     <div class="grid grid-cols-2 gap-2">
                         ${['Kurang Pedas', 'Biasa', 'Pedas', 'Extra Pedas'].map(lvl => `
                             <input type="radio" name="pedas" id="p_${lvl}" value="${lvl}" class="hidden" ${lvl === 'Biasa' ? 'checked' : ''}>
@@ -522,18 +516,36 @@
                         `).join('')}
                     </div>
                 </div>
+            `;
+
+            // NEW: Add Side Choice only for Set C (ID 3)
+            if (id === 3) {
+                modalContent += `
+                    <div class="space-y-1 pt-3">
+                        <p class="text-[10px] font-bold text-gray-400 uppercase tracking-widest leading-none mb-2">Pilihan Sampingan</p>
+                        <div class="grid grid-cols-2 gap-2">
+                            <input type="radio" name="side_choice" id="side_hp" value="Hati & Pedal" class="hidden" checked>
+                            <label for="side_hp" class="border-2 border-gray-100 rounded-xl p-3 text-center text-xs font-bold transition cursor-pointer active:bg-gray-50">Hati & Pedal</label>
+                            <input type="radio" name="side_choice" id="side_kg" value="Kobis Goreng" class="hidden">
+                            <label for="side_kg" class="border-2 border-gray-100 rounded-xl p-3 text-center text-xs font-bold transition cursor-pointer active:bg-gray-50">Kobis Goreng</label>
+                        </div>
+                    </div>
+                `;
+            }
+
+            modalContent += `
                 <div class="space-y-1 pt-3">
                     <p class="text-[10px] font-bold text-gray-400 uppercase tracking-widest leading-none mb-2">Pilihan Set</p>
                     <div class="grid grid-cols-2 gap-2">
                         <input type="radio" name="set_type" id="type_ala" value="Ala-Carte" class="hidden" checked onchange="toggleDrinkSelect(false)">
                         <label for="type_ala" class="border-2 border-gray-100 rounded-xl p-3 text-center transition cursor-pointer active:bg-gray-50">
                             <span class="block font-bold text-xs mb-0.5">Ala-Carte</span>
-                            <span class="text-[10px] text-red-600 font-bold">RM ${selectedMenuItem.alakart.toFixed(2)}</span>
+                            <span class="text-[10px] text-red-600 font-bold leading-none">RM ${selectedMenuItem.alakart.toFixed(2)}</span>
                         </label>
                         <input type="radio" name="set_type" id="type_combo" value="Kombo" class="hidden" onchange="toggleDrinkSelect(true)">
                         <label for="type_combo" class="border-2 border-gray-100 rounded-xl p-3 text-center transition cursor-pointer active:bg-gray-50">
                             <span class="block font-bold text-xs mb-0.5">Kombo</span>
-                            <span class="text-[10px] text-red-600 font-bold">RM ${selectedMenuItem.combo.toFixed(2)}</span>
+                            <span class="text-[10px] text-red-600 font-bold leading-none">RM ${selectedMenuItem.combo.toFixed(2)}</span>
                         </label>
                     </div>
                 </div>
@@ -547,6 +559,8 @@
                     </div>
                 </div>
             `;
+
+            body.innerHTML = modalContent;
             document.getElementById('menuModal').classList.remove('hidden');
         }
 
@@ -556,12 +570,30 @@
         function addToCartFromModal() {
             const pedas = document.querySelector('input[name="pedas"]:checked').value;
             const setType = document.querySelector('input[name="set_type"]:checked').value;
+            
+            let extraStr = pedas;
+            
+            // Collect side choice if Set C
+            if (selectedMenuItem.id === 3) {
+                const side = document.querySelector('input[name="side_choice"]:checked').value;
+                extraStr += `, ${side}`;
+            }
+
             let drink = "";
             if (setType === 'Kombo') {
                 const dEl = document.querySelector('input[name="drink"]:checked');
                 drink = dEl ? dEl.value : "";
+                if(drink) extraStr += `, ${drink}`;
             }
-            cart.push({ name: selectedMenuItem.name, type: setType, options: `(${pedas}${drink ? ', ' + drink : ''})`, price: setType === 'Kombo' ? selectedMenuItem.combo : selectedMenuItem.alakart, uniqueId: Date.now() });
+
+            cart.push({ 
+                name: selectedMenuItem.name, 
+                type: setType, 
+                options: `(${extraStr})`, 
+                price: setType === 'Kombo' ? selectedMenuItem.combo : selectedMenuItem.alakart, 
+                uniqueId: Date.now() 
+            });
+            
             updateCartDisplay(); closeModal(); showNotification(`${selectedMenuItem.name} ditambah!`);
         }
 
@@ -597,7 +629,7 @@
                 list.innerHTML = cart.map(item => `
                     <div class="flex justify-between items-center py-4 border-b border-gray-50 last:border-0 text-sm">
                         <div class="flex-1 mr-4 text-left">
-                            <p class="font-bold text-gray-800 leading-tight">${item.name}</p>
+                            <p class="font-bold text-gray-800 leading-tight text-sm">${item.name}</p>
                             <p class="text-[11px] text-gray-400 uppercase tracking-tighter mt-1 font-semibold">${item.type} ${item.options}</p>
                         </div>
                         <div class="flex items-center space-x-5">
@@ -634,7 +666,6 @@
             const footer = document.getElementById('footer-section');
             const subContainer = document.getElementById('footer-subtotal-container');
             
-            // Footer visibility logic
             footer.classList.toggle('hidden', step === 0);
 
             if (step === 3) {
