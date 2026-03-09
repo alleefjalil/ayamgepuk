@@ -10,7 +10,7 @@
         body { 
             font-family: 'Poppins', sans-serif; 
             background-color: #fefce8; 
-            /* Space for fixed header and footer */
+            /* Ruang untuk header yang tinggi dan footer fixed */
             padding-top: 165px;
             padding-bottom: 120px;
         }
@@ -42,8 +42,8 @@
             visibility: visible;
             animation: fadein 0.5s, fadeout 0.5s 2.5s;
         }
-        @keyframes fadein { from {bottom: 0; opacity: 0;} to {bottom: 130px; opacity: 1;} }
-        @keyframes fadeout { from {bottom: 130px; opacity: 1;} to {bottom: 0; opacity: 0;} }
+        @keyframes fadein { from {bottom: 0; opacity: 0;} to {bottom: 40px; opacity: 1;} }
+        @keyframes fadeout { from {bottom: 40px; opacity: 1;} to {bottom: 0; opacity: 0;} }
 
         /* Header & Footer Fixed Positions */
         .fixed-header {
@@ -62,7 +62,7 @@
             padding-bottom: env(safe-area-inset-bottom);
         }
 
-        /* Unified Button Styling */
+        /* Standardized Action Buttons */
         .btn-footer {
             height: 52px;
             display: flex;
@@ -76,7 +76,7 @@
         }
         .btn-footer:active { transform: scale(0.96); }
 
-        /* Cart Overlay positioning */
+        /* Cart Overlay Positioning */
         #footer-cart-content {
             display: none;
             position: fixed;
@@ -93,6 +93,7 @@
             padding-right: 4px;
         }
 
+        /* Collapsible Menu Logic */
         #menu-image-section {
             transition: max-height 0.3s ease-out;
             max-height: 0;
@@ -100,6 +101,7 @@
         }
         #menu-image-section.show { max-height: 1000px; }
 
+        /* UI Cards */
         .tc-card {
             background-color: white;
             border-radius: 1.5rem;
@@ -364,13 +366,12 @@
 
         <!-- CENTERED FOOTER ACTION BAR -->
         <div class="max-w-md mx-auto p-4 flex items-center justify-center space-x-6">
-            <!-- Subtotal Group -->
             <div id="footer-subtotal-container" class="flex flex-col items-center min-w-[90px]">
                 <p class="text-[8px] text-gray-400 uppercase font-bold tracking-tighter leading-none mb-1">Subtotal</p>
                 <p class="text-lg font-bold text-gray-800 leading-none whitespace-nowrap" id="total-price">RM 0.00</p>
             </div>
 
-            <!-- Cart Toggle Logo -->
+            <!-- View Cart Logo Icon -->
             <div id="footer-cart-toggle" class="invisible flex-shrink-0">
                 <button onclick="toggleCart()" class="relative p-3 bg-red-50 text-red-700 rounded-xl border border-red-100 transition active:scale-90 flex items-center justify-center shadow-inner">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path></svg>
@@ -419,27 +420,27 @@
         ];
 
         const addonsData = [
-            { id: 201, name: "Ayam 1/4 @ Crispy", price: 7.00 },
-            { id: 202, name: "Ayam Crispy Sultan", price: 6.00 },
-            { id: 203, name: "Ikan Keli", price: 6.00 },
-            { id: 204, name: "Ayam Kunyit", price: 7.00 },
-            { id: 205, name: "Telur Mata", price: 2.00 },
-            { id: 206, name: "Ulaman", price: 2.00 },
-            { id: 207, name: "Kobis Goreng", price: 3.00 },
-            { id: 208, name: "Sambal Gajus", price: 3.00 },
-            { id: 209, name: "Bumbu Gajus", price: 3.00 },
-            { id: 210, name: "Nasi Putih", price: 2.00 },
-            { id: 211, name: "Tahu (2) + Tempe (5)", price: 3.50 },
-            { id: 212, name: "Hati (2) + Pedal (1)", price: 3.50 },
-            { id: 213, name: "Kicap", price: 1.00 }
+            { id: 201, name: "Ayam 1/4 @ Crispy", price: 7.00, outOfStock: true },
+            { id: 202, name: "Ayam Crispy Sultan", price: 6.00, outOfStock: true },
+            { id: 203, name: "Ikan Keli", price: 6.00, outOfStock: false },
+            { id: 204, name: "Ayam Kunyit", price: 7.00, outOfStock: false },
+            { id: 205, name: "Telur Mata", price: 2.00, outOfStock: false },
+            { id: 206, name: "Ulaman", price: 2.00, outOfStock: false },
+            { id: 207, name: "Kobis Goreng", price: 3.00, outOfStock: false },
+            { id: 208, name: "Sambal Gajus", price: 3.00, outOfStock: false },
+            { id: 209, name: "Bumbu Gajus", price: 3.00, outOfStock: false },
+            { id: 210, name: "Nasi Putih", price: 2.00, outOfStock: false },
+            { id: 211, name: "Tahu (2) + Tempe (5)", price: 3.50, outOfStock: false },
+            { id: 212, name: "Hati (2) + Pedal (1)", price: 3.50, outOfStock: false },
+            { id: 213, name: "Kicap", price: 1.00, outOfStock: false }
         ];
 
         const drinksData = [
-            { id: 301, name: "Tea 'o' Ais", price: 2.50 },
-            { id: 302, name: "Sirap Ais", price: 2.50 },
-            { id: 303, name: "Limau Ais", price: 2.50 },
-            { id: 304, name: "Tea 'o' Limau Ais", price: 2.50 },
-            { id: 305, name: "Sirap Limau Ais", price: 2.50 }
+            { id: 301, name: "Tea 'o' Ais", price: 2.50, outOfStock: false },
+            { id: 302, name: "Sirap Ais", price: 2.50, outOfStock: false },
+            { id: 303, name: "Limau Ais", price: 2.50, outOfStock: false },
+            { id: 304, name: "Tea 'o' Limau Ais", price: 2.50, outOfStock: false },
+            { id: 305, name: "Sirap Limau Ais", price: 2.50, outOfStock: false }
         ];
 
         let cart = [];
@@ -448,7 +449,7 @@
         let isCartOpen = false;
 
         function init() {
-            // Render UI lists
+            // Render Menu UI
             const menuContainer = document.getElementById('menu-list');
             menuData.forEach(item => {
                 const div = document.createElement('div');
@@ -475,19 +476,45 @@
                 menuContainer.appendChild(div);
             });
 
+            // Render Addons UI (KEMASKINI: Ditambah logik outOfStock)
             const addonContainer = document.getElementById('addon-list');
             addonsData.forEach(item => {
                 const div = document.createElement('div');
-                div.className = "flex items-center justify-between py-2.5 border-b border-gray-50 last:border-0";
-                div.innerHTML = `<div><span class="text-sm font-bold text-gray-700">${item.name}</span><span class="text-xs text-red-600 block font-bold mt-0.5">RM ${item.price.toFixed(2)}</span></div><button onclick="addToCartDirect(${item.id}, 'addon')" class="text-2xl text-red-700 font-bold px-3 transition active:scale-150">+</button>`;
+                const isOut = item.outOfStock;
+                div.className = `flex items-center justify-between py-2.5 border-b border-gray-50 last:border-0 ${isOut ? 'opacity-50 grayscale' : ''}`;
+                
+                const actionPart = isOut 
+                    ? `<span class="text-[10px] font-bold text-gray-400 uppercase">Habis Stok</span>`
+                    : `<button onclick="addToCartDirect(${item.id}, 'addon')" class="text-2xl text-red-700 font-bold px-3 active:scale-150 transition">+</button>`;
+
+                div.innerHTML = `
+                    <div>
+                        <span class="text-sm font-bold text-gray-700">${item.name}</span>
+                        <span class="text-xs text-red-600 block font-bold mt-0.5">RM ${item.price.toFixed(2)}</span>
+                    </div>
+                    ${actionPart}
+                `;
                 addonContainer.appendChild(div);
             });
 
+            // Render Drinks UI
             const drinkContainer = document.getElementById('drink-list');
             drinksData.forEach(item => {
                 const div = document.createElement('div');
-                div.className = "flex items-center justify-between py-2.5 border-b border-gray-50 last:border-0";
-                div.innerHTML = `<div><span class="text-sm font-bold text-gray-700">${item.name}</span><span class="text-xs text-red-600 block font-bold mt-0.5">RM ${item.price.toFixed(2)}</span></div><button onclick="addToCartDirect(${item.id}, 'drink')" class="text-2xl text-red-700 font-bold px-3 transition active:scale-150">+</button>`;
+                const isOut = item.outOfStock;
+                div.className = `flex items-center justify-between py-2.5 border-b border-gray-50 last:border-0 ${isOut ? 'opacity-50 grayscale' : ''}`;
+                
+                const actionPart = isOut 
+                    ? `<span class="text-[10px] font-bold text-gray-400 uppercase">Habis Stok</span>`
+                    : `<button onclick="addToCartDirect(${item.id}, 'drink')" class="text-2xl text-red-700 font-bold px-3 active:scale-150 transition">+</button>`;
+
+                div.innerHTML = `
+                    <div>
+                        <span class="text-sm font-bold text-gray-700">${item.name}</span>
+                        <span class="text-xs text-red-600 block font-bold mt-0.5">RM ${item.price.toFixed(2)}</span>
+                    </div>
+                    ${actionPart}
+                `;
                 drinkContainer.appendChild(div);
             });
             
@@ -619,6 +646,7 @@
         function addToCartDirect(id, cat) {
             const list = cat === 'addon' ? addonsData : drinksData;
             const itm = list.find(e => e.id === id);
+            if (itm.outOfStock) return;
             cart.push({ name: itm.name, type: cat === 'addon' ? "Add-on" : "Minuman", options: "", price: itm.price, uniqueId: Date.now() });
             updateCartDisplay(); showNotification(`${itm.name} ditambah!`);
         }
