@@ -42,10 +42,10 @@
             visibility: visible;
             animation: fadein 0.5s, fadeout 0.5s 2.5s;
         }
-        @keyframes fadein { from {bottom: 0; opacity: 0;} to {bottom: 40px; opacity: 1;} }
+        @keyframes fadein { from {bottom: 0; opacity: 0;} to {bottom: 130px; opacity: 1;} }
         @keyframes fadeout { from {bottom: 40px; opacity: 1;} to {bottom: 0; opacity: 0;} }
 
-        /* Header & Footer Fixed Positions */
+        /* Header & Footer Kedudukan Tetap */
         .fixed-header {
             position: fixed;
             top: 0;
@@ -62,7 +62,7 @@
             padding-bottom: env(safe-area-inset-bottom);
         }
 
-        /* Standardized Action Buttons */
+        /* Gaya Butang Standard */
         .btn-footer {
             height: 52px;
             display: flex;
@@ -76,7 +76,7 @@
         }
         .btn-footer:active { transform: scale(0.96); }
 
-        /* Cart Overlay Positioning */
+        /* Kandungan Bakul */
         #footer-cart-content {
             display: none;
             position: fixed;
@@ -93,7 +93,7 @@
             padding-right: 4px;
         }
 
-        /* Collapsible Menu Logic */
+        /* Seksyen Gambar Menu */
         #menu-image-section {
             transition: max-height 0.3s ease-out;
             max-height: 0;
@@ -101,7 +101,7 @@
         }
         #menu-image-section.show { max-height: 1000px; }
 
-        /* UI Cards */
+        /* Kad UI */
         .tc-card {
             background-color: white;
             border-radius: 1.5rem;
@@ -152,8 +152,8 @@
                 </p>
             </div>
 
-            <div class="bg-red-700 text-white rounded-3xl p-6 shadow-lg mb-6">
-                <p class="text-[11px] leading-relaxed text-center italic">
+            <div class="bg-red-700 text-white rounded-3xl p-6 shadow-lg mb-6 text-center">
+                <p class="text-[11px] leading-relaxed italic">
                     "Bulan Ramadan lebih bermakna bila dikongsi bersama. Bawa keluarga dan rakan-rakan untuk menikmati hidangan Ayam Gepuk Sultan Changlun. Ruang selesa, hidangan mengenyangkan, dan harga yang sangat berbaloi."
                 </p>
             </div>
@@ -170,7 +170,7 @@
                     </li>
                     <li class="flex items-start">
                         <span class="bg-red-100 text-red-700 font-bold px-1.5 rounded mr-3 flex-shrink-0">2</span>
-                        <p><span class="font-bold text-gray-900">Waktu Tempahan:</span> Sila lakukan tempahan selewat-lewatnya sebelum jam 7:00 PM.</p>
+                        <p><span class="font-bold text-gray-900">Waktu Tempahan:</span> Sila lakukan tempahan selewat-lewatnya sebelum jam 7:00 PM. Tempahan hanya dibuka untuk hari yang sama sahaja.</p>
                     </li>
                     <li class="flex items-start">
                         <span class="bg-red-100 text-red-700 font-bold px-1.5 rounded mr-3 flex-shrink-0">3</span>
@@ -213,7 +213,7 @@
                     <span class="bg-red-700 text-white w-6 h-6 rounded-full flex items-center justify-center mr-2 text-[10px]">1</span>
                     Pilihan Menu Utama
                 </h2>
-                <p class="text-[11px] text-red-700 italic font-semibold mt-1 ml-8 uppercase">Sila rujuk gambar menu di bawah</p>
+                <p class="text-[11px] text-red-700 italic font-semibold mt-1 ml-8 uppercase tracking-wide">Sila rujuk gambar menu di bawah</p>
             </div>
 
             <!-- COLLAPSIBLE MENU IMAGE -->
@@ -256,19 +256,26 @@
                 <span class="bg-red-700 text-white w-6 h-6 rounded-full flex items-center justify-center mr-2 text-[10px]">2</span>
                 Maklumat Tempahan Meja
             </h2>
-            <div class="bg-white rounded-2xl p-6 shadow-md space-y-4 border border-gray-100">
+            <div class="bg-white rounded-2xl p-6 shadow-md space-y-5 border border-gray-100">
                 <div>
                     <label class="block text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-1">Nama Penuh</label>
                     <input type="text" id="cust_nama" class="w-full p-3 rounded-lg border border-gray-300 text-sm outline-none focus:ring-1 focus:ring-red-500" placeholder="Masukkan nama anda">
                 </div>
+                
+                <!-- PAPARAN TARIKH (Hanya Hari Ini) -->
+                <div>
+                    <label class="block text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-1">Tarikh Tempahan</label>
+                    <div id="display_tarikh" class="w-full p-3 rounded-lg border border-gray-200 bg-gray-50 text-sm font-bold text-gray-700 flex items-center justify-between">
+                        <!-- Diisi oleh JS -->
+                    </div>
+                    <input type="hidden" id="cust_tarikh">
+                    <p class="text-[9px] text-red-600 mt-1.5 italic font-medium">Nota: Tempahan dibuka untuk hari yang sama sahaja.</p>
+                </div>
+
                 <div class="grid grid-cols-2 gap-4">
                     <div>
-                        <label class="block text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-1">Tarikh</label>
-                        <input type="date" id="cust_tarikh" class="w-full p-3 rounded-lg border border-gray-300 text-sm outline-none">
-                    </div>
-                    <div>
                         <label class="block text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-1">Masa Berbuka</label>
-                        <select id="cust_masa" class="w-full p-3 rounded-lg border border-gray-300 text-sm outline-none">
+                        <select id="cust_masa" class="w-full p-3 rounded-lg border border-gray-300 text-sm outline-none focus:ring-1 focus:ring-red-500">
                             <option value="2:00 PM">2:00 PM</option>
                             <option value="3:00 PM">3:00 PM</option>
                             <option value="4:00 PM">4:00 PM</option>
@@ -281,25 +288,25 @@
                             <option value="11:00 PM">11:00 PM</option>
                         </select>
                     </div>
-                </div>
-                <div class="grid grid-cols-2 gap-4">
                     <div>
                         <label class="block text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-1">Bil. Pax</label>
-                        <select id="cust_pax" class="w-full p-3 rounded-lg border border-gray-300 text-sm outline-none">
+                        <select id="cust_pax" class="w-full p-3 rounded-lg border border-gray-300 text-sm outline-none focus:ring-1 focus:ring-red-500">
                             <script>for(let i=1; i<=30; i++) document.write(`<option value="${i}">${i} Pax</option>`);</script>
                         </select>
                     </div>
-                    <div>
-                        <label class="block text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-1">Jenis</label>
-                        <select id="cust_jenis" class="w-full p-3 rounded-lg border border-gray-300 text-sm outline-none">
-                            <option value="Dine-In">Dine-In</option>
-                            <option value="Pick-up">Pick-up</option>
-                        </select>
-                    </div>
                 </div>
+                
+                <div>
+                    <label class="block text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-1">Jenis Layanan</label>
+                    <select id="cust_jenis" class="w-full p-3 rounded-lg border border-gray-300 text-sm outline-none focus:ring-1 focus:ring-red-500">
+                        <option value="Dine-In">Dine-In</option>
+                        <option value="Pick-up">Pick-up</option>
+                    </select>
+                </div>
+
                 <div>
                     <label class="block text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-1">Pesanan Khas (Nota)</label>
-                    <textarea id="cust_notes" rows="2" class="w-full p-3 rounded-lg border border-gray-300 text-sm outline-none" placeholder="Contoh: Nak satu baby chair..."></textarea>
+                    <textarea id="cust_notes" rows="2" class="w-full p-3 rounded-lg border border-gray-300 text-sm outline-none focus:ring-1 focus:ring-red-500" placeholder="Contoh: Nak satu baby chair..."></textarea>
                 </div>
             </div>
         </div>
@@ -337,7 +344,7 @@
                     </p>
                 </div>
 
-                <div id="conf_notes_container" class="bg-gray-50 p-3 rounded-lg hidden text-[10px] italic text-gray-600 border-l-4 border-red-200"></div>
+                <div id="conf_notes_container" class="bg-gray-50 p-3 rounded-lg hidden text-[10px] italic text-gray-600 border-l-4 border-red-200 text-center"></div>
                 
                 <div class="pt-2">
                     <div class="bg-red-700 text-white p-4 rounded-xl flex justify-between items-center shadow-lg border-2 border-red-800">
@@ -351,8 +358,6 @@
 
     <!-- FOOTER (Fixed) -->
     <div id="footer-section" class="fixed-footer bg-white border-t border-gray-100 shadow-[0_-12px_40px_rgba(0,0,0,0.12)] w-full hidden">
-        
-        <!-- Cart Drawer (Overlay) -->
         <div id="footer-cart-content" class="bg-white border-t border-gray-100 shadow-2xl max-w-md mx-auto rounded-t-3xl overflow-hidden animate-slide-up">
             <div class="py-4 px-6 flex justify-between items-center border-b border-gray-100 bg-gray-50">
                 <h3 class="text-xs font-bold text-gray-800 uppercase flex items-center tracking-widest">
@@ -364,14 +369,12 @@
             <div id="footer-cart-list" class="max-h-64 overflow-y-auto space-y-3 py-4 px-6 text-sm text-gray-700"></div>
         </div>
 
-        <!-- CENTERED FOOTER ACTION BAR -->
         <div class="max-w-md mx-auto p-4 flex items-center justify-center space-x-6">
             <div id="footer-subtotal-container" class="flex flex-col items-center min-w-[90px]">
                 <p class="text-[8px] text-gray-400 uppercase font-bold tracking-tighter leading-none mb-1">Subtotal</p>
                 <p class="text-lg font-bold text-gray-800 leading-none whitespace-nowrap" id="total-price">RM 0.00</p>
             </div>
 
-            <!-- View Cart Logo Icon -->
             <div id="footer-cart-toggle" class="invisible flex-shrink-0">
                 <button onclick="toggleCart()" class="relative p-3 bg-red-50 text-red-700 rounded-xl border border-red-100 transition active:scale-90 flex items-center justify-center shadow-inner">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path></svg>
@@ -379,7 +382,6 @@
                 </button>
             </div>
 
-            <!-- Main Action Button -->
             <button id="main-action-btn" onclick="handleMainAction()" class="btn-footer bg-sultan-red text-white shadow-md text-sm px-6 whitespace-nowrap min-w-[150px]">
                 <span id="btn-label">Seterusnya</span>
                 <svg id="btn-icon" class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path></svg>
@@ -407,7 +409,7 @@
     </div>
 
     <script>
-        // Database
+        // Database Produk
         const menuData = [
             { id: 1, name: "Ayam Gepuk Set A", desc: "Nasi, Ayam 1/4, Sambal, Kobis, Timun", alakart: 12.50, combo: 14.00, outOfStock: false },
             { id: 2, name: "Ayam Gepuk Set B", desc: "Nasi, Ayam 1/4, Tahu, Tempe, Sambal, Kobis, Timun", alakart: 13.50, combo: 15.00, outOfStock: false },
@@ -455,45 +457,21 @@
                 const div = document.createElement('div');
                 const isOut = item.outOfStock;
                 div.className = `bg-white p-4 rounded-2xl shadow-sm border border-gray-100 flex items-center justify-between transition ${isOut ? 'opacity-50 grayscale' : 'active:bg-gray-50'}`;
-                
-                const btnClass = isOut 
-                    ? "bg-gray-300 text-gray-500 cursor-not-allowed" 
-                    : "bg-sultan-yellow text-red-800 shadow-sm active:scale-95";
-                
+                const btnClass = isOut ? "bg-gray-300 text-gray-500 cursor-not-allowed" : "bg-sultan-yellow text-red-800 shadow-sm active:scale-95";
                 const btnAction = isOut ? "disabled" : `onclick="openMenuModal(${item.id})"`;
                 const btnLabel = isOut ? "Habis Stok" : "Pilih";
-
-                div.innerHTML = `
-                    <div class="flex-1 text-left">
-                        <h4 class="font-bold text-gray-800 text-sm leading-tight">${item.name}</h4>
-                        <p class="text-[10px] text-gray-500 mt-1.5 leading-tight pr-2">${item.desc}</p>
-                        <p class="text-red-700 font-bold mt-2 text-xs">RM ${item.alakart.toFixed(2)} - RM ${item.combo.toFixed(2)}</p>
-                    </div>
-                    <button ${btnAction} class="${btnClass} px-4 py-2 rounded-xl text-[10px] font-bold uppercase tracking-wider flex-shrink-0 ml-2">
-                        ${btnLabel}
-                    </button>
-                `;
+                div.innerHTML = `<div class="flex-1 text-left"><h4 class="font-bold text-gray-800 text-sm leading-tight">${item.name}</h4><p class="text-[10px] text-gray-500 mt-1.5 leading-tight pr-2">${item.desc}</p><p class="text-red-700 font-bold mt-2 text-xs">RM ${item.alakart.toFixed(2)} - RM ${item.combo.toFixed(2)}</p></div><button ${btnAction} class="${btnClass} px-4 py-2 rounded-xl text-[10px] font-bold uppercase tracking-wider flex-shrink-0 ml-2">${btnLabel}</button>`;
                 menuContainer.appendChild(div);
             });
 
-            // Render Addons UI (KEMASKINI: Ditambah logik outOfStock)
+            // Render Addons UI
             const addonContainer = document.getElementById('addon-list');
             addonsData.forEach(item => {
                 const div = document.createElement('div');
                 const isOut = item.outOfStock;
                 div.className = `flex items-center justify-between py-2.5 border-b border-gray-50 last:border-0 ${isOut ? 'opacity-50 grayscale' : ''}`;
-                
-                const actionPart = isOut 
-                    ? `<span class="text-[10px] font-bold text-gray-400 uppercase">Habis Stok</span>`
-                    : `<button onclick="addToCartDirect(${item.id}, 'addon')" class="text-2xl text-red-700 font-bold px-3 active:scale-150 transition">+</button>`;
-
-                div.innerHTML = `
-                    <div>
-                        <span class="text-sm font-bold text-gray-700">${item.name}</span>
-                        <span class="text-xs text-red-600 block font-bold mt-0.5">RM ${item.price.toFixed(2)}</span>
-                    </div>
-                    ${actionPart}
-                `;
+                const actionPart = isOut ? `<span class="text-[10px] font-bold text-gray-400 uppercase">Habis Stok</span>` : `<button onclick="addToCartDirect(${item.id}, 'addon')" class="text-2xl text-red-700 font-bold px-3 active:scale-150 transition">+</button>`;
+                div.innerHTML = `<div><span class="text-sm font-bold text-gray-700">${item.name}</span><span class="text-xs text-red-600 block font-bold mt-0.5">RM ${item.price.toFixed(2)}</span></div>${actionPart}`;
                 addonContainer.appendChild(div);
             });
 
@@ -501,33 +479,24 @@
             const drinkContainer = document.getElementById('drink-list');
             drinksData.forEach(item => {
                 const div = document.createElement('div');
-                const isOut = item.outOfStock;
-                div.className = `flex items-center justify-between py-2.5 border-b border-gray-50 last:border-0 ${isOut ? 'opacity-50 grayscale' : ''}`;
-                
-                const actionPart = isOut 
-                    ? `<span class="text-[10px] font-bold text-gray-400 uppercase">Habis Stok</span>`
-                    : `<button onclick="addToCartDirect(${item.id}, 'drink')" class="text-2xl text-red-700 font-bold px-3 active:scale-150 transition">+</button>`;
-
-                div.innerHTML = `
-                    <div>
-                        <span class="text-sm font-bold text-gray-700">${item.name}</span>
-                        <span class="text-xs text-red-600 block font-bold mt-0.5">RM ${item.price.toFixed(2)}</span>
-                    </div>
-                    ${actionPart}
-                `;
+                div.className = "flex items-center justify-between py-2.5 border-b border-gray-50 last:border-0";
+                div.innerHTML = `<div><span class="text-sm font-bold text-gray-700">${item.name}</span><span class="text-xs text-red-600 block font-bold mt-0.5">RM ${item.price.toFixed(2)}</span></div><button onclick="addToCartDirect(${item.id}, 'drink')" class="text-2xl text-red-700 font-bold px-3 active:scale-150 transition">+</button>`;
                 drinkContainer.appendChild(div);
             });
             
-            // local date logic
+            // Logik Tarikh Hari Ini
             const today = new Date();
-            const yyyy = today.getFullYear();
-            const mm = String(today.getMonth() + 1).padStart(2, '0');
             const dd = String(today.getDate()).padStart(2, '0');
+            const mm = String(today.getMonth() + 1).padStart(2, '0');
+            const yyyy = today.getFullYear();
             const dateStr = `${yyyy}-${mm}-${dd}`;
+            const displayStr = `${dd}/${mm}/${yyyy} (Hari Ini)`;
             
-            const dateInp = document.getElementById('cust_tarikh');
-            dateInp.value = dateStr;
-            dateInp.min = dateStr;
+            document.getElementById('cust_tarikh').value = dateStr;
+            document.getElementById('display_tarikh').innerHTML = `
+                <span>${displayStr}</span>
+                <svg class="w-4 h-4 text-green-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
+            `;
             
             updateCartDisplay();
         }
@@ -628,8 +597,7 @@
             }
 
             if (setType === 'Kombo') {
-                const dEl = document.querySelector('input[name="drink"]:checked');
-                const drink = dEl ? dEl.value : "";
+                const drink = document.querySelector('input[name="drink"]:checked')?.value;
                 if(drink) extraStr += `, ${drink}`;
             }
 
@@ -707,13 +675,13 @@
             document.getElementById('step2').classList.toggle('hidden', step !== 2);
             document.getElementById('step3').classList.toggle('hidden', step !== 3);
             
+            const footer = document.getElementById('footer-section');
+            footer.classList.toggle('hidden', step === 0);
+
+            const mainBtn = document.getElementById('main-action-btn');
+            const subContainer = document.getElementById('footer-subtotal-container');
             const btnLabel = document.getElementById('btn-label');
             const btnIcon = document.getElementById('btn-icon');
-            const mainBtn = document.getElementById('main-action-btn');
-            const footer = document.getElementById('footer-section');
-            const subContainer = document.getElementById('footer-subtotal-container');
-            
-            footer.classList.toggle('hidden', step === 0);
 
             if (step === 3) {
                 btnLabel.innerText = "Hantar Pesanan ke WhatsApp";
@@ -741,12 +709,12 @@
             const notes = document.getElementById('cust_notes').value;
             const container = document.getElementById('conf_notes_container');
             container.classList.toggle('hidden', !notes);
-            if(notes) container.innerText = `Nota Pesanan: ${notes}`;
+            if(notes) container.innerText = `Nota: ${notes}`;
             document.getElementById('conf_total').innerText = `RM ${total.toFixed(2)}`;
             document.getElementById('order-summary-final').innerHTML = cart.map(item => `
                 <div class="flex justify-between items-start text-xs border-b border-gray-50 pb-2 last:border-0">
                     <div class="flex-1 mr-2 text-left">
-                        <div class="font-bold text-gray-800 leading-tight">${item.name} <span class="text-[8px] bg-red-50 text-red-700 px-1.5 py-0.5 rounded uppercase tracking-wider ml-1">${item.type}</span></div>
+                        <div class="font-bold text-gray-800 leading-tight text-sm">${item.name} <span class="text-[8px] bg-red-50 text-red-700 px-1.5 py-0.5 rounded uppercase tracking-wider ml-1">${item.type}</span></div>
                         <div class="text-[10px] text-gray-400 mt-1">${item.options}</div>
                     </div>
                     <div class="flex items-center space-x-3">
