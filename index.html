@@ -45,7 +45,6 @@
         @keyframes fadein { from {bottom: 0; opacity: 0;} to {bottom: 130px; opacity: 1;} }
         @keyframes fadeout { from {bottom: 40px; opacity: 1;} to {bottom: 0; opacity: 0;} }
 
-        /* Header & Footer Kedudukan Tetap */
         .fixed-header {
             position: fixed;
             top: 0;
@@ -62,7 +61,6 @@
             padding-bottom: env(safe-area-inset-bottom);
         }
 
-        /* Gaya Butang Standard */
         .btn-footer {
             height: 52px;
             display: flex;
@@ -76,7 +74,6 @@
         }
         .btn-footer:active { transform: scale(0.96); }
 
-        /* Kandungan Bakul */
         #footer-cart-content {
             display: none;
             position: fixed;
@@ -93,7 +90,6 @@
             padding-right: 4px;
         }
 
-        /* Seksyen Gambar Menu */
         #menu-image-section {
             transition: max-height 0.3s ease-out;
             max-height: 0;
@@ -101,7 +97,6 @@
         }
         #menu-image-section.show { max-height: 1000px; }
 
-        /* Kad UI */
         .tc-card {
             background-color: white;
             border-radius: 1.5rem;
@@ -115,9 +110,8 @@
 
     <div id="notification">Item ditambah!</div>
 
-    <!-- HEADER (Fixed & Centered Contents) -->
+    <!-- HEADER -->
     <header class="fixed-header bg-white shadow-xl w-full">
-        <!-- Brand Bar -->
         <div class="bg-sultan-red text-white py-3 px-4 flex items-center justify-center text-center border-b border-red-800">
             <img src="https://lh3.googleusercontent.com/d/1yQeeitmXIqPffmPhCdLZqETLflGSyrbs" 
                  alt="Logo Sultan" 
@@ -128,7 +122,6 @@
             </div>
         </div>
 
-        <!-- Info Bar -->
         <div class="bg-white px-4 py-2 border-b border-gray-100 flex flex-col items-center text-center space-y-1">
             <div class="flex items-center text-[9px] text-gray-600">
                 <svg class="w-3.5 h-3.5 text-red-700 mr-1.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"></path></svg>
@@ -149,6 +142,17 @@
                 <h2 class="text-3xl font-black text-red-700 uppercase tracking-tighter mb-1">Jom Berbuka</h2>
                 <p class="text-xs font-bold text-gray-800 leading-tight px-4 uppercase tracking-wide">
                     Raikan Iftar Bersama Yang Tersayang di Ayam Gepuk Sultan Changlun
+                </p>
+            </div>
+
+            <!-- STATUS BADGE: FULLY BOOKED -->
+            <div id="fully-booked-notice" class="mb-6 bg-red-50 border-2 border-red-600 rounded-3xl p-6 text-center shadow-md">
+                <div class="inline-flex items-center justify-center w-12 h-12 bg-red-600 text-white rounded-full mb-3">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
+                </div>
+                <h3 class="text-lg font-extrabold text-red-700 uppercase tracking-tight mb-1">Maaf, Tempahan Penuh!</h3>
+                <p id="fully-booked-message" class="text-[11px] text-red-600 font-bold leading-relaxed">
+                    <!-- Dinamik message diisi via JS -->
                 </p>
             </div>
 
@@ -187,11 +191,10 @@
                 </ul>
             </div>
 
-            <button onclick="changeStep(1)" class="w-full btn-footer bg-sultan-red text-white shadow-xl text-lg tracking-widest mb-6 uppercase">
-                Mula Tempahan
+            <button id="intro-action-btn" onclick="changeStep(1)" class="w-full btn-footer bg-gray-400 text-white shadow-md text-lg tracking-widest mb-6 uppercase cursor-not-allowed" disabled>
+                Tempahan Ditutup Buat Sementara
             </button>
 
-            <!-- CORPORATE FOOTER CREDIT -->
             <div class="text-center pb-10">
                 <p class="text-[9px] text-gray-400 font-medium tracking-widest uppercase mb-1">
                     Digital Booking System exclusively powered by
@@ -216,11 +219,10 @@
                 <p class="text-[11px] text-red-700 italic font-semibold mt-1 ml-8 uppercase tracking-wide">Sila rujuk gambar menu di bawah</p>
             </div>
 
-            <!-- COLLAPSIBLE MENU IMAGE -->
             <div class="mb-6">
                 <button onclick="toggleMenuImage()" class="w-full bg-white border border-gray-200 py-2.5 px-4 rounded-xl flex items-center justify-between shadow-sm active:bg-gray-50 transition">
                     <span class="text-xs font-bold text-gray-700 uppercase tracking-wider flex items-center">
-                        <svg class="w-4 h-4 mr-2 text-red-700" fill="currentColor" viewBox="0 0 24 24"><path d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                        <svg class="w-4 h-4 mr-2 text-red-700" fill="currentColor" viewBox="0 0 24 24"><path d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
                         Lihat Gambar Menu
                     </span>
                     <svg id="arrow-icon" class="w-4 h-4 text-gray-400 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
@@ -233,13 +235,11 @@
             </div>
             
             <div id="menu-list" class="space-y-4"></div>
-
             <h2 class="text-lg font-bold text-gray-800 mt-10 mb-4 flex items-center">
                 <span class="bg-red-700 text-white w-6 h-6 rounded-full flex items-center justify-center mr-2 text-[10px]">2</span>
                 Add-Ons (Tambahan)
             </h2>
             <div id="addon-list" class="space-y-3 bg-white p-4 rounded-xl shadow-sm border border-yellow-200"></div>
-
             <h2 class="text-lg font-bold text-gray-800 mt-10 mb-4 flex items-center">
                 <span class="bg-red-700 text-white w-6 h-6 rounded-full flex items-center justify-center mr-2 text-[10px]">3</span>
                 Minuman (Air)
@@ -247,7 +247,7 @@
             <div id="drink-list" class="space-y-3 bg-white p-4 rounded-xl shadow-sm border border-yellow-200"></div>
         </div>
 
-        <!-- STEP 2: CUSTOMER DETAILS -->
+        <!-- STEP 2: DETAILS -->
         <div id="step2" class="hidden">
             <button onclick="changeStep(1)" class="mb-4 text-red-700 font-semibold flex items-center text-sm transition active:scale-95">
                 ← Kembali ke Menu
@@ -261,31 +261,17 @@
                     <label class="block text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-1">Nama Penuh</label>
                     <input type="text" id="cust_nama" class="w-full p-3 rounded-lg border border-gray-300 text-sm outline-none focus:ring-1 focus:ring-red-500" placeholder="Masukkan nama anda">
                 </div>
-                
-                <!-- PAPARAN TARIKH (Hanya Hari Ini) -->
                 <div>
                     <label class="block text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-1">Tarikh Tempahan</label>
-                    <div id="display_tarikh" class="w-full p-3 rounded-lg border border-gray-200 bg-gray-50 text-sm font-bold text-gray-700 flex items-center justify-between">
-                        <!-- Diisi oleh JS -->
-                    </div>
+                    <div id="display_tarikh" class="w-full p-3 rounded-lg border border-gray-200 bg-gray-50 text-sm font-bold text-gray-700 flex items-center justify-between"></div>
                     <input type="hidden" id="cust_tarikh">
                     <p class="text-[9px] text-red-600 mt-1.5 italic font-medium">Nota: Tempahan dibuka untuk hari yang sama sahaja.</p>
                 </div>
-
                 <div class="grid grid-cols-2 gap-4">
                     <div>
                         <label class="block text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-1">Masa Berbuka</label>
                         <select id="cust_masa" class="w-full p-3 rounded-lg border border-gray-300 text-sm outline-none focus:ring-1 focus:ring-red-500">
-                            <option value="2:00 PM">2:00 PM</option>
-                            <option value="3:00 PM">3:00 PM</option>
-                            <option value="4:00 PM">4:00 PM</option>
-                            <option value="5:00 PM">5:00 PM</option>
-                            <option value="6:00 PM">6:00 PM</option>
-                            <option value="7:00 PM" selected>7:00 PM</option>
-                            <option value="8:00 PM">8:00 PM</option>
-                            <option value="9:00 PM">9:00 PM</option>
-                            <option value="10:00 PM">10:00 PM</option>
-                            <option value="11:00 PM">11:00 PM</option>
+                            <option value="2:00 PM">2:00 PM</option><option value="3:00 PM">3:00 PM</option><option value="4:00 PM">4:00 PM</option><option value="5:00 PM">5:00 PM</option><option value="6:00 PM">6:00 PM</option><option value="7:00 PM" selected>7:00 PM</option><option value="8:00 PM">8:00 PM</option><option value="9:00 PM">9:00 PM</option><option value="10:00 PM">10:00 PM</option><option value="11:00 PM">11:00 PM</option>
                         </select>
                     </div>
                     <div>
@@ -295,15 +281,12 @@
                         </select>
                     </div>
                 </div>
-                
                 <div>
                     <label class="block text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-1">Jenis Layanan</label>
                     <select id="cust_jenis" class="w-full p-3 rounded-lg border border-gray-300 text-sm outline-none focus:ring-1 focus:ring-red-500">
-                        <option value="Dine-In">Dine-In</option>
-                        <option value="Pick-up">Pick-up</option>
+                        <option value="Dine-In">Dine-In</option><option value="Pick-up">Pick-up</option>
                     </select>
                 </div>
-
                 <div>
                     <label class="block text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-1">Pesanan Khas (Nota)</label>
                     <textarea id="cust_notes" rows="2" class="w-full p-3 rounded-lg border border-gray-300 text-sm outline-none focus:ring-1 focus:ring-red-500" placeholder="Contoh: Nak satu baby chair..."></textarea>
@@ -337,15 +320,12 @@
                     </div>
                     <div id="order-summary-final" class="space-y-3 text-sm text-gray-700"></div>
                 </div>
-                
                 <div class="bg-yellow-50 border border-yellow-200 p-4 rounded-xl text-center">
                     <p class="text-[11px] text-red-700 font-bold leading-relaxed">
                         Sila hantar pesanan ke WhatsApp untuk membuat tempahan meja. Admin akan memberikan QR Code selepas pesanan diterima. Bayaran penuh perlu dijelaskan segera bagi mengesahkan tempahan meja anda.
                     </p>
                 </div>
-
                 <div id="conf_notes_container" class="bg-gray-50 p-3 rounded-lg hidden text-[10px] italic text-gray-600 border-l-4 border-red-200 text-center"></div>
-                
                 <div class="pt-2">
                     <div class="bg-red-700 text-white p-4 rounded-xl flex justify-between items-center shadow-lg border-2 border-red-800">
                         <span class="font-bold text-xs uppercase tracking-widest">JUMLAH KESELURUHAN</span>
@@ -356,7 +336,7 @@
         </div>
     </div>
 
-    <!-- FOOTER (Fixed) -->
+    <!-- FOOTER -->
     <div id="footer-section" class="fixed-footer bg-white border-t border-gray-100 shadow-[0_-12px_40px_rgba(0,0,0,0.12)] w-full hidden">
         <div id="footer-cart-content" class="bg-white border-t border-gray-100 shadow-2xl max-w-md mx-auto rounded-t-3xl overflow-hidden animate-slide-up">
             <div class="py-4 px-6 flex justify-between items-center border-b border-gray-100 bg-gray-50">
@@ -368,20 +348,17 @@
             </div>
             <div id="footer-cart-list" class="max-h-64 overflow-y-auto space-y-3 py-4 px-6 text-sm text-gray-700"></div>
         </div>
-
         <div class="max-w-md mx-auto p-4 flex items-center justify-center space-x-6">
             <div id="footer-subtotal-container" class="flex flex-col items-center min-w-[90px]">
                 <p class="text-[8px] text-gray-400 uppercase font-bold tracking-tighter leading-none mb-1">Subtotal</p>
                 <p class="text-lg font-bold text-gray-800 leading-none whitespace-nowrap" id="total-price">RM 0.00</p>
             </div>
-
             <div id="footer-cart-toggle" class="invisible flex-shrink-0">
                 <button onclick="toggleCart()" class="relative p-3 bg-red-50 text-red-700 rounded-xl border border-red-100 transition active:scale-90 flex items-center justify-center shadow-inner">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path></svg>
                     <span id="item-count-badge" class="absolute -top-1 -right-1 bg-red-700 text-white w-5 h-5 rounded-full flex items-center justify-center text-[10px] font-extrabold border-2 border-white shadow-sm">0</span>
                 </button>
             </div>
-
             <button id="main-action-btn" onclick="handleMainAction()" class="btn-footer bg-sultan-red text-white shadow-md text-sm px-6 whitespace-nowrap min-w-[150px]">
                 <span id="btn-label">Seterusnya</span>
                 <svg id="btn-icon" class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path></svg>
@@ -389,27 +366,25 @@
         </div>
     </div>
 
-    <!-- SELECTION MODAL -->
+    <!-- MODAL -->
     <div id="menuModal" class="hidden fixed inset-0 bg-black bg-opacity-60 z-[1000] flex items-end sm:items-center justify-center p-0 sm:p-4">
         <div class="bg-white w-full max-w-md rounded-t-3xl sm:rounded-2xl p-5 shadow-2xl animate-slide-up flex flex-col max-h-[85vh] overflow-hidden">
             <div class="flex justify-between items-center mb-3 flex-shrink-0">
                 <h3 id="modalTitle" class="text-lg font-bold text-gray-800 tracking-tight">Pilihan</h3>
                 <button onclick="closeModal()" class="text-gray-400 text-3xl font-light p-1 leading-none">&times;</button>
             </div>
-            
             <div id="modalBody" class="space-y-4 modal-body-scroll flex-1"></div>
-            
             <div class="pt-4 flex-shrink-0 border-t border-gray-100 mt-2 bg-white text-center">
-                <button onclick="addToCartFromModal()" class="btn-footer w-full bg-sultan-red text-white shadow-xl text-base uppercase tracking-widest h-12">
-                    Tambah Ke Bakul
-                </button>
+                <button onclick="addToCartFromModal()" class="btn-footer w-full bg-sultan-red text-white shadow-xl text-base uppercase tracking-widest h-12">Tambah Ke Bakul</button>
                 <div class="h-4"></div>
             </div>
         </div>
     </div>
 
     <script>
-        // Database Produk
+        // CONFIG: Tukar isFullyBooked kepada false sekiranya ingin buka semula tempahan.
+        const isFullyBooked = true;
+
         const menuData = [
             { id: 1, name: "Ayam Gepuk Set A", desc: "Nasi, Ayam 1/4, Sambal, Kobis, Timun", alakart: 12.50, combo: 14.00, outOfStock: false },
             { id: 2, name: "Ayam Gepuk Set B", desc: "Nasi, Ayam 1/4, Tahu, Tempe, Sambal, Kobis, Timun", alakart: 13.50, combo: 15.00, outOfStock: false },
@@ -451,7 +426,25 @@
         let isCartOpen = false;
 
         function init() {
-            // Render Menu UI
+            const today = new Date();
+            const dd = String(today.getDate()).padStart(2, '0');
+            const mm = String(today.getMonth() + 1).padStart(2, '0');
+            const yyyy = today.getFullYear();
+            const dateStr = `${yyyy}-${mm}-${dd}`;
+            const displayStr = `${dd}/${mm}/${yyyy}`;
+            
+            // Kemaskini Mesej Fully Booked (KEMASKINI: Ditambah ayat buka balik esok)
+            document.getElementById('fully-booked-message').innerText = `Kami telah mencapai had maksimum tempahan meja untuk hari ini (${displayStr}). Untuk tempahan hari seterusnya, sistem akan dibuka semula pada hari esok. Terima kasih atas sokongan anda yang luar biasa.`;
+
+            if (!isFullyBooked) {
+                const introBtn = document.getElementById('intro-action-btn');
+                introBtn.classList.replace('bg-gray-400', 'bg-sultan-red');
+                introBtn.classList.remove('cursor-not-allowed');
+                introBtn.innerText = "Mula Tempahan";
+                introBtn.disabled = false;
+                document.getElementById('fully-booked-notice').classList.add('hidden');
+            }
+
             const menuContainer = document.getElementById('menu-list');
             menuData.forEach(item => {
                 const div = document.createElement('div');
@@ -464,7 +457,6 @@
                 menuContainer.appendChild(div);
             });
 
-            // Render Addons UI
             const addonContainer = document.getElementById('addon-list');
             addonsData.forEach(item => {
                 const div = document.createElement('div');
@@ -475,7 +467,6 @@
                 addonContainer.appendChild(div);
             });
 
-            // Render Drinks UI
             const drinkContainer = document.getElementById('drink-list');
             drinksData.forEach(item => {
                 const div = document.createElement('div');
@@ -484,19 +475,11 @@
                 drinkContainer.appendChild(div);
             });
             
-            // Logik Tarikh Hari Ini
-            const today = new Date();
-            const dd = String(today.getDate()).padStart(2, '0');
-            const mm = String(today.getMonth() + 1).padStart(2, '0');
-            const yyyy = today.getFullYear();
-            const dateStr = `${yyyy}-${mm}-${dd}`;
-            const displayStr = `${dd}/${mm}/${yyyy} (Hari Ini)`;
-            
             document.getElementById('cust_tarikh').value = dateStr;
-            document.getElementById('display_tarikh').innerHTML = `
-                <span>${displayStr}</span>
-                <svg class="w-4 h-4 text-green-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
-            `;
+            const displayTarikhEl = document.getElementById('display_tarikh');
+            if (displayTarikhEl) {
+                displayTarikhEl.innerHTML = `<span>${displayStr} (Hari Ini)</span><svg class="w-4 h-4 text-green-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>`;
+            }
             
             updateCartDisplay();
         }
@@ -525,60 +508,11 @@
             selectedMenuItem = menuData.find(m => m.id === id);
             document.getElementById('modalTitle').innerText = selectedMenuItem.name;
             const body = document.getElementById('modalBody');
-            
-            let modalContent = `
-                <div class="space-y-1">
-                    <p class="text-[10px] font-bold text-gray-400 uppercase tracking-widest leading-none mb-2">Tahap Pedas</p>
-                    <div class="grid grid-cols-2 gap-2">
-                        ${['Kurang Pedas', 'Biasa', 'Pedas', 'Extra Pedas'].map(lvl => `
-                            <input type="radio" name="pedas" id="p_${lvl}" value="${lvl}" class="hidden" ${lvl === 'Biasa' ? 'checked' : ''}>
-                            <label for="p_${lvl}" class="border-2 border-gray-100 rounded-xl p-3 text-center text-xs font-bold transition cursor-pointer active:bg-gray-50">${lvl}</label>
-                        `).join('')}
-                    </div>
-                </div>
-            `;
-
+            let modalContent = `<div class="space-y-1"><p class="text-[10px] font-bold text-gray-400 uppercase tracking-widest leading-none mb-2">Tahap Pedas</p><div class="grid grid-cols-2 gap-2">${['Kurang Pedas', 'Biasa', 'Pedas', 'Extra Pedas'].map(lvl => `<input type="radio" name="pedas" id="p_${lvl}" value="${lvl}" class="hidden" ${lvl === 'Biasa' ? 'checked' : ''}><label for="p_${lvl}" class="border-2 border-gray-100 rounded-xl p-3 text-center text-xs font-bold transition cursor-pointer active:bg-gray-50">${lvl}</label>`).join('')}</div></div>`;
             if (id === 3) {
-                modalContent += `
-                    <div class="space-y-1 pt-3">
-                        <p class="text-[10px] font-bold text-gray-400 uppercase tracking-widest leading-none mb-2">Pilihan Sampingan</p>
-                        <div class="grid grid-cols-2 gap-2">
-                            <input type="radio" name="side_choice" id="side_hp" value="Hati & Pedal" class="hidden" checked>
-                            <label for="side_hp" class="border-2 border-gray-100 rounded-xl p-3 text-center text-xs font-bold transition cursor-pointer active:bg-gray-50">Hati & Pedal</label>
-                            <input type="radio" name="side_choice" id="side_kg" value="Kobis Goreng" class="hidden">
-                            <label for="side_kg" class="border-2 border-gray-100 rounded-xl p-3 text-center text-xs font-bold transition cursor-pointer active:bg-gray-50">Kobis Goreng</label>
-                        </div>
-                    </div>
-                `;
+                modalContent += `<div class="space-y-1 pt-3"><p class="text-[10px] font-bold text-gray-400 uppercase tracking-widest leading-none mb-2">Pilihan Sampingan</p><div class="grid grid-cols-2 gap-2"><input type="radio" name="side_choice" id="side_hp" value="Hati & Pedal" class="hidden" checked><label for="side_hp" class="border-2 border-gray-100 rounded-xl p-3 text-center text-xs font-bold transition cursor-pointer active:bg-gray-50">Hati & Pedal</label><input type="radio" name="side_choice" id="side_kg" value="Kobis Goreng" class="hidden"><label for="side_kg" class="border-2 border-gray-100 rounded-xl p-3 text-center text-xs font-bold transition cursor-pointer active:bg-gray-50">Kobis Goreng</label></div></div>`;
             }
-
-            modalContent += `
-                <div class="space-y-1 pt-3">
-                    <p class="text-[10px] font-bold text-gray-400 uppercase tracking-widest leading-none mb-2">Pilihan Set</p>
-                    <div class="grid grid-cols-2 gap-2">
-                        <input type="radio" name="set_type" id="type_ala" value="Ala-Carte" class="hidden" checked onchange="toggleDrinkSelect(false)">
-                        <label for="type_ala" class="border-2 border-gray-100 rounded-xl p-3 text-center transition cursor-pointer active:bg-gray-50">
-                            <span class="block font-bold text-xs mb-0.5">Ala-Carte</span>
-                            <span class="text-[10px] text-red-600 font-bold leading-none">RM ${selectedMenuItem.alakart.toFixed(2)}</span>
-                        </label>
-                        <input type="radio" name="set_type" id="type_combo" value="Kombo" class="hidden" onchange="toggleDrinkSelect(true)">
-                        <label for="type_combo" class="border-2 border-gray-100 rounded-xl p-3 text-center transition cursor-pointer active:bg-gray-50">
-                            <span class="block font-bold text-xs mb-0.5">Kombo</span>
-                            <span class="text-[10px] text-red-600 font-bold leading-none">RM ${selectedMenuItem.combo.toFixed(2)}</span>
-                        </label>
-                    </div>
-                </div>
-                <div id="drinkSection" class="hidden pt-3">
-                    <p class="text-[10px] font-bold text-gray-400 uppercase tracking-widest leading-none mb-2">Pilih Air Kombo</p>
-                    <div class="grid grid-cols-2 gap-2">
-                        ${['Teh O Ais', 'Sirap Ais'].map(drink => `
-                            <input type="radio" name="drink" id="d_${drink}" value="${drink}" class="hidden" ${drink === 'Teh O Ais' ? 'checked' : ''}>
-                            <label for="d_${drink}" class="border-2 border-gray-100 rounded-xl p-3 text-center text-xs font-bold transition cursor-pointer active:bg-gray-50">${drink}</label>
-                        `).join('')}
-                    </div>
-                </div>
-            `;
-
+            modalContent += `<div class="space-y-1 pt-3"><p class="text-[10px] font-bold text-gray-400 uppercase tracking-widest leading-none mb-2">Pilihan Set</p><div class="grid grid-cols-2 gap-2"><input type="radio" name="set_type" id="type_ala" value="Ala-Carte" class="hidden" checked onchange="toggleDrinkSelect(false)"><label for="type_ala" class="border-2 border-gray-100 rounded-xl p-3 text-center transition cursor-pointer active:bg-gray-50"><span class="block font-bold text-xs mb-0.5">Ala-Carte</span><span class="text-[10px] text-red-600 font-bold leading-none">RM ${selectedMenuItem.alakart.toFixed(2)}</span></label><input type="radio" name="set_type" id="type_combo" value="Kombo" class="hidden" onchange="toggleDrinkSelect(true)"><label for="type_combo" class="border-2 border-gray-100 rounded-xl p-3 text-center transition cursor-pointer active:bg-gray-50"><span class="block font-bold text-xs mb-0.5">Kombo</span><span class="text-[10px] text-red-600 font-bold leading-none">RM ${selectedMenuItem.combo.toFixed(2)}</span></label></div></div><div id="drinkSection" class="hidden pt-3"><p class="text-[10px] font-bold text-gray-400 uppercase tracking-widest leading-none mb-2">Pilih Air Kombo</p><div class="grid grid-cols-2 gap-2">${['Teh O Ais', 'Sirap Ais'].map(drink => ` <input type="radio" name="drink" id="d_${drink}" value="${drink}" class="hidden" ${drink === 'Teh O Ais' ? 'checked' : ''}><label for="d_${drink}" class="border-2 border-gray-100 rounded-xl p-3 text-center text-xs font-bold transition cursor-pointer active:bg-gray-50">${drink}</label>`).join('')}</div></div>`;
             body.innerHTML = modalContent;
             document.getElementById('menuModal').classList.remove('hidden');
         }
@@ -590,24 +524,12 @@
             const pedas = document.querySelector('input[name="pedas"]:checked').value;
             const setType = document.querySelector('input[name="set_type"]:checked').value;
             let extraStr = pedas;
-            
-            if (selectedMenuItem.id === 3) {
-                const side = document.querySelector('input[name="side_choice"]:checked').value;
-                extraStr += `, ${side}`;
-            }
-
+            if (selectedMenuItem.id === 3) { extraStr += `, ${document.querySelector('input[name="side_choice"]:checked').value}`; }
             if (setType === 'Kombo') {
                 const drink = document.querySelector('input[name="drink"]:checked')?.value;
                 if(drink) extraStr += `, ${drink}`;
             }
-
-            cart.push({ 
-                name: selectedMenuItem.name, 
-                type: setType, 
-                options: `(${extraStr})`, 
-                price: setType === 'Kombo' ? selectedMenuItem.combo : selectedMenuItem.alakart, 
-                uniqueId: Date.now() 
-            });
+            cart.push({ name: selectedMenuItem.name, type: setType, options: `(${extraStr})`, price: setType === 'Kombo' ? selectedMenuItem.combo : selectedMenuItem.alakart, uniqueId: Date.now() });
             updateCartDisplay(); closeModal(); showNotification(`${selectedMenuItem.name} ditambah!`);
         }
 
@@ -637,24 +559,10 @@
             const toggle = document.getElementById('footer-cart-toggle');
             const badge = document.getElementById('item-count-badge');
             const list = document.getElementById('footer-cart-list');
-            
             if (cart.length > 0) {
                 toggle.classList.remove('invisible');
                 badge.innerText = cart.length;
-                list.innerHTML = cart.map(item => `
-                    <div class="flex justify-between items-center py-4 border-b border-gray-50 last:border-0 text-sm">
-                        <div class="flex-1 mr-4 text-left">
-                            <p class="font-bold text-gray-800 leading-tight text-sm">${item.name}</p>
-                            <p class="text-[11px] text-gray-400 uppercase tracking-tighter mt-1 font-semibold">${item.type} ${item.options}</p>
-                        </div>
-                        <div class="flex items-center space-x-5">
-                            <span class="font-bold text-red-700 whitespace-nowrap text-base">RM${item.price.toFixed(2)}</span>
-                            <button onclick="removeFromCart(${item.uniqueId})" class="text-red-300 active:scale-150 transition p-2">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" /></svg>
-                            </button>
-                        </div>
-                    </div>
-                `).join('');
+                list.innerHTML = cart.map(item => `<div class="flex justify-between items-center py-4 border-b border-gray-50 last:border-0 text-sm"><div class="flex-1 mr-4 text-left"><p class="font-bold text-gray-800 leading-tight text-sm">${item.name}</p><p class="text-[11px] text-gray-400 uppercase tracking-tighter mt-1 font-semibold">${item.type} ${item.options}</p></div><div class="flex items-center space-x-5"><span class="font-bold text-red-700 whitespace-nowrap text-base">RM${item.price.toFixed(2)}</span><button onclick="removeFromCart(${item.uniqueId})" class="text-red-300 active:scale-150 transition p-2"><svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" /></svg></button></div></div>`).join('');
             } else {
                 toggle.classList.add('invisible');
                 if (isCartOpen) toggleCart();
@@ -662,11 +570,10 @@
         }
 
         function changeStep(step) {
+            if (step === 1 && isFullyBooked) { return; } 
             if (step === 2 && cart.length === 0) { alert("Sila pilih menu dahulu!"); return; }
             if (step === 3) {
-                if (!document.getElementById('cust_nama').value) {
-                    alert("Sila isi Nama Penuh anda!"); return;
-                }
+                if (!document.getElementById('cust_nama').value) { alert("Sila isi Nama Penuh anda!"); return; }
                 updateConfirmDisplay();
             }
             currentStep = step;
@@ -674,15 +581,12 @@
             document.getElementById('step1').classList.toggle('hidden', step !== 1);
             document.getElementById('step2').classList.toggle('hidden', step !== 2);
             document.getElementById('step3').classList.toggle('hidden', step !== 3);
-            
             const footer = document.getElementById('footer-section');
             footer.classList.toggle('hidden', step === 0);
-
             const mainBtn = document.getElementById('main-action-btn');
             const subContainer = document.getElementById('footer-subtotal-container');
             const btnLabel = document.getElementById('btn-label');
             const btnIcon = document.getElementById('btn-icon');
-
             if (step === 3) {
                 btnLabel.innerText = "Hantar Pesanan ke WhatsApp";
                 mainBtn.classList.replace('bg-sultan-red', 'bg-green-500');
@@ -711,20 +615,7 @@
             container.classList.toggle('hidden', !notes);
             if(notes) container.innerText = `Nota: ${notes}`;
             document.getElementById('conf_total').innerText = `RM ${total.toFixed(2)}`;
-            document.getElementById('order-summary-final').innerHTML = cart.map(item => `
-                <div class="flex justify-between items-start text-xs border-b border-gray-50 pb-2 last:border-0">
-                    <div class="flex-1 mr-2 text-left">
-                        <div class="font-bold text-gray-800 leading-tight text-sm">${item.name} <span class="text-[8px] bg-red-50 text-red-700 px-1.5 py-0.5 rounded uppercase tracking-wider ml-1">${item.type}</span></div>
-                        <div class="text-[10px] text-gray-400 mt-1">${item.options}</div>
-                    </div>
-                    <div class="flex items-center space-x-3">
-                        <div class="font-bold text-gray-800 whitespace-nowrap text-sm">RM ${item.price.toFixed(2)}</div>
-                        <button onclick="deleteItemInConf(${item.uniqueId})" class="text-red-500 p-1 active:scale-125 transition">
-                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" /></svg>
-                        </button>
-                    </div>
-                </div>
-            `).join('');
+            document.getElementById('order-summary-final').innerHTML = cart.map(item => `<div class="flex justify-between items-start text-xs border-b border-gray-50 pb-2 last:border-0"><div class="flex-1 mr-2 text-left"><div class="font-bold text-gray-800 leading-tight text-sm">${item.name} <span class="text-[8px] bg-red-50 text-red-700 px-1.5 py-0.5 rounded uppercase tracking-wider ml-1">${item.type}</span></div><div class="text-[10px] text-gray-400 mt-1">${item.options}</div></div><div class="flex items-center space-x-3"><div class="font-bold text-gray-800 whitespace-nowrap text-sm">RM ${item.price.toFixed(2)}</div><button onclick="deleteItemInConf(${item.uniqueId})" class="text-red-500 p-1 active:scale-125 transition"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" /></svg></button></div></div>`).join('');
         }
 
         function handleMainAction() {
